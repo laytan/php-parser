@@ -1,6 +1,6 @@
 package position
 
-const DefaultBlockSize = 1024
+const DefaultBlockSize = 50
 
 type Pool struct {
 	block []Position
