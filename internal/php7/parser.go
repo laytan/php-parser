@@ -54,12 +54,3 @@ func (p *Parser) Parse() int {
 func (p *Parser) GetRootNode() ast.Vertex {
 	return p.rootNode
 }
-
-// helpers
-
-func lastNode(nn []ast.Vertex) ast.Vertex {
-	if len(nn) == 0 {
-		return nil
-	}
-	return nn[len(nn)-1]
-}
