@@ -49,7 +49,7 @@ func (p *ParserDumpTestSuite) UsePHP8() {
 }
 
 func (p *ParserDumpTestSuite) Run() {
-    p.t.Helper()
+	p.t.Helper()
 
 	config := conf.Config{
 		Version: &p.Version,

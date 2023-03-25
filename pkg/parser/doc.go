@@ -1,5 +1,4 @@
 /*
-
 A Parser for PHP written in Go
 
 Package usage example:
