@@ -27,15 +27,17 @@ import (
 	"github.com/VKCOM/php-parser/pkg/visitor/traverser"
 )
 
-var wg sync.WaitGroup
-var phpVersion *version.Version
-var profiler string
-var dump *bool
-var showResolvedNs *bool
-var printBack *bool
-var printPath *bool
-var printErrors *bool
-var printExecTime *bool
+var (
+	wg             sync.WaitGroup
+	phpVersion     *version.Version
+	profiler       string
+	dump           *bool
+	showResolvedNs *bool
+	printBack      *bool
+	printPath      *bool
+	printErrors    *bool
+	printExecTime  *bool
+)
 
 type file struct {
 	path    string
@@ -79,9 +81,11 @@ func main() {
 	case "cpu":
 		defer profile.Start(profile.ProfilePath("."), profile.NoShutdownHook).Stop()
 	case "mem":
-		defer profile.Start(profile.MemProfile, profile.ProfilePath("."), profile.NoShutdownHook).Stop()
+		defer profile.Start(profile.MemProfile, profile.ProfilePath("."), profile.NoShutdownHook).
+			Stop()
 	case "trace":
-		defer profile.Start(profile.TraceProfile, profile.ProfilePath("."), profile.NoShutdownHook).Stop()
+		defer profile.Start(profile.TraceProfile, profile.ProfilePath("."), profile.NoShutdownHook).
+			Stop()
 	}
 
 	numCpu := runtime.GOMAXPROCS(0)
