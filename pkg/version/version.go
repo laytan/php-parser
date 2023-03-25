@@ -17,14 +17,11 @@ var (
 	// ErrUnsupportedVer is returned if a version out of supported range
 	ErrUnsupportedVer = errors.New("the version is out of supported range")
 
-	php5RangeStart = &Version{Major: 5}
-	php5RangeEnd   = &Version{Major: 5, Minor: 6}
-
 	php7RangeStart = &Version{Major: 7}
 	php7RangeEnd   = &Version{Major: 7, Minor: 4}
 
 	php8RangeStart = &Version{Major: 8}
-	php8RangeEnd   = &Version{Major: 8, Minor: 1}
+	php8RangeEnd   = &Version{Major: 8, Minor: 2}
 )
 
 func New(v string) (*Version, error) {
@@ -34,7 +31,7 @@ func New(v string) (*Version, error) {
 		return nil, ErrInvalidSemVer
 	}
 
-	var ver = new(Version)
+	ver := new(Version)
 	var err error
 
 	ver.Major, err = strconv.ParseUint(parts[0], 10, 64)
@@ -51,8 +48,7 @@ func New(v string) (*Version, error) {
 }
 
 func (v *Version) Validate() error {
-	if !v.InRange(php5RangeStart, php5RangeEnd) &&
-		!v.InRange(php7RangeStart, php7RangeEnd) &&
+	if !v.InRange(php7RangeStart, php7RangeEnd) &&
 		!v.InRange(php8RangeStart, php8RangeEnd) {
 		return ErrUnsupportedVer
 	}
