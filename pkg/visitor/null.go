@@ -4,23 +4,9 @@ import (
 	"github.com/VKCOM/php-parser/pkg/ast"
 )
 
-type Null struct {
-}
+type Null struct{}
 
-func (v *Null) Enter(_ string, _ bool) {
-	// do nothing
-}
-func (v *Null) Leave(_ string, _ bool) {
-	// do nothing
-}
-
-func (v *Null) EnterNode(_ ast.Vertex) bool {
-	return true
-}
-
-func (v *Null) LeaveNode(_ ast.Vertex) {
-	// do nothing
-}
+var _ ast.Visitor = &Null{}
 
 func (v *Null) Root(_ *ast.Root) {
 	// do nothing
