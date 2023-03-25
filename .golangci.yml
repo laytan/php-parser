@@ -1,0 +1,9 @@
+linters-settings:
+    errcheck:
+        exclude-functions:
+            - (io.Writer).Write
+run:
+    skip-files:
+        - internal/php7/scanner.go # Generated
+        - internal/php8/scanner.go # Generated
+    tests: false
