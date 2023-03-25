@@ -2,6 +2,15 @@ package ast
 
 import "github.com/VKCOM/php-parser/pkg/position"
 
+// The edge-case/overwrites, from node type name to their visitor function name.
+var TypeToVisitorNameMap = map[string]string{
+	"Name":             "NameName",
+	"NamePart":         "NameNamePart",
+	"StmtGroupUseList": "StmtGroupUse",
+	"StmtUseList":      "StmtUse",
+	"StmtUse":          "StmtUseDeclaration",
+}
+
 type Vertex interface {
 	Accept(v Visitor)
 	GetPosition() *position.Position
