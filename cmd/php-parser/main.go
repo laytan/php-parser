@@ -5,7 +5,6 @@ import (
 	"flag"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"log"
 	"os"
 	"path/filepath"
@@ -120,7 +119,7 @@ func processPath(pathList []string, fileCh chan<- *file) {
 		err = filepath.Walk(real, func(path string, f os.FileInfo, err error) error {
 			if !f.IsDir() && filepath.Ext(path) == ".php" {
 				wg.Add(1)
-				content, err := ioutil.ReadFile(path)
+				content, err := os.ReadFile(path)
 				checkErr(err)
 				fileCh <- &file{path, content}
 			}
@@ -181,7 +180,7 @@ func printerWorker(r <-chan result) {
 			p := printer.NewPrinter(o)
 			res.rootNode.Accept(p)
 
-			err := ioutil.WriteFile(res.path, o.Bytes(), 0644)
+			err := os.WriteFile(res.path, o.Bytes(), 0644)
 			checkErr(err)
 		}
 
