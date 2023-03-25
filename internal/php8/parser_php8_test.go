@@ -4177,7 +4177,7 @@ class Point {
 								},
 							},
 							AmpersandTkn: &token.Token{
-								ID: token.ID(57492),
+								ID: token.T_AMPERSAND_FOLLOWED_BY_VAR_OR_VARARG,
 								Val: []byte("&"),
 								FreeFloating: []*token.Token{
 									{
@@ -4302,7 +4302,7 @@ class Point {
 								},
 							},
 							AmpersandTkn: &token.Token{
-								ID: token.ID(57492),
+								ID: token.T_AMPERSAND_FOLLOWED_BY_VAR_OR_VARARG,
 								Val: []byte("&"),
 								FreeFloating: []*token.Token{
 									{

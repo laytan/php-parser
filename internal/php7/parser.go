@@ -2,7 +2,6 @@ package php7
 
 import (
 	"github.com/VKCOM/php-parser/internal/position"
-	"github.com/VKCOM/php-parser/internal/scanner"
 	"github.com/VKCOM/php-parser/pkg/ast"
 	"github.com/VKCOM/php-parser/pkg/conf"
 	"github.com/VKCOM/php-parser/pkg/errors"
@@ -11,7 +10,7 @@ import (
 
 // Parser structure
 type Parser struct {
-	Lexer          *scanner.Lexer
+	Lexer          *Lexer
 	currentToken   *token.Token
 	rootNode       ast.Vertex
 	errHandlerFunc func(*errors.Error)
@@ -19,7 +18,7 @@ type Parser struct {
 }
 
 // NewParser creates and returns new Parser
-func NewParser(lexer *scanner.Lexer, config conf.Config) *Parser {
+func NewParser(lexer *Lexer, config conf.Config) *Parser {
 	return &Parser{
 		Lexer:          lexer,
 		errHandlerFunc: config.ErrorHandlerFunc,

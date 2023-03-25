@@ -6,7 +6,6 @@ import (
 	"testing"
 
 	"github.com/VKCOM/php-parser/internal/php7"
-	"github.com/VKCOM/php-parser/internal/scanner"
 	"github.com/VKCOM/php-parser/pkg/ast"
 	"github.com/VKCOM/php-parser/pkg/conf"
 	"github.com/VKCOM/php-parser/pkg/version"
@@ -36,7 +35,7 @@ abstract class Bar extends Baz
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 
@@ -74,7 +73,7 @@ func parse(src string) ast.Vertex {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 
@@ -93,7 +92,6 @@ func print(n ast.Vertex) string {
 // test node
 
 func TestParseAndPrintRoot(t *testing.T) {
-
 	src := ` <div>Hello</div> 
 	<?php
 	$a;
@@ -120,7 +118,6 @@ func TestParseAndPrintIdentifier(t *testing.T) {
 }
 
 func TestParseAndPrintParameterTMP(t *testing.T) {
-
 	src := `<?php
 	function foo ( foo & ... $foo = null ) {}`
 
@@ -132,7 +129,6 @@ func TestParseAndPrintParameterTMP(t *testing.T) {
 }
 
 func TestParseAndPrintParameter(t *testing.T) {
-
 	src := `<?php
 	function & foo (
 		? int $a , & $b = null
@@ -149,7 +145,6 @@ func TestParseAndPrintParameter(t *testing.T) {
 }
 
 func TestParseAndPrintNullable(t *testing.T) {
-
 	src := `<?php
 	function & foo ( ? int $a ) {
 		/* do nothing */
@@ -599,7 +594,6 @@ func TestParseAndPrintFunctionCall(t *testing.T) {
 }
 
 func TestParseAndPrintInclude(t *testing.T) {
-
 	src := `<?php
 	include 'foo' ;
 	include_once 'bar' ;`
@@ -732,7 +726,6 @@ func TestParseAndPrintReference(t *testing.T) {
 }
 
 func TestParseAndPrintRequire(t *testing.T) {
-
 	src := `<?php
 	require __DIR__ . '/folder' ;
 	require_once $a ;`
@@ -1134,7 +1127,6 @@ func TestParseAndPrintForeach(t *testing.T) {
 }
 
 func TestParseAndPrintFunction(t *testing.T) {
-
 	src := `<?php
 	function & foo ( ) : void {
 		;

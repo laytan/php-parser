@@ -6,7 +6,6 @@ import (
 	"gotest.tools/assert"
 
 	"github.com/VKCOM/php-parser/internal/php7"
-	"github.com/VKCOM/php-parser/internal/scanner"
 	"github.com/VKCOM/php-parser/pkg/ast"
 	"github.com/VKCOM/php-parser/pkg/conf"
 	"github.com/VKCOM/php-parser/pkg/errors"
@@ -103,7 +102,7 @@ func TestIdentifier(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -1679,7 +1678,7 @@ func TestPhp7ArgumentNode(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -3363,7 +3362,7 @@ func TestPhp7ParameterNode(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -3423,7 +3422,7 @@ func TestCommentEndFile(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -3550,7 +3549,7 @@ func TestName(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -3685,7 +3684,7 @@ func TestFullyQualified(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -3830,7 +3829,7 @@ func TestRelative(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -3976,7 +3975,7 @@ func TestScalarEncapsed_SimpleVar(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -4120,7 +4119,7 @@ func TestScalarEncapsed_SimpleVarOneChar(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -4283,7 +4282,7 @@ func TestScalarEncapsed_SimpleVarEndsEcapsed(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -4482,7 +4481,7 @@ func TestScalarEncapsed_StringVarCurveOpen(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -4682,7 +4681,7 @@ func TestScalarEncapsed_SimpleVarPropertyFetch(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -4846,7 +4845,7 @@ func TestScalarEncapsed_DollarOpenCurlyBraces(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -5049,7 +5048,7 @@ func TestScalarEncapsed_DollarOpenCurlyBracesDimNumber(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -5278,7 +5277,7 @@ func TestScalarEncapsed_CurlyOpenMethodCall(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -5457,7 +5456,7 @@ LBL;
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -5636,7 +5635,7 @@ LBL;
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -5769,7 +5768,7 @@ LBL;
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -5880,7 +5879,7 @@ CAD;
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -6013,7 +6012,7 @@ CAD;
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -6101,7 +6100,7 @@ func TestScalarMagicConstant(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -6188,7 +6187,7 @@ func TestScalarNumber_LNumber(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -6275,7 +6274,7 @@ func TestScalarNumber_DNumber(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -6362,7 +6361,7 @@ func TestScalarNumber_Float(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -6449,7 +6448,7 @@ func TestScalarNumber_BinaryLNumber(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -6536,7 +6535,7 @@ func TestScalarNumber_BinaryDNumber(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -6623,7 +6622,7 @@ func TestScalarNumber_HLNumber(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -6710,7 +6709,7 @@ func TestScalarNumber_HDNumber(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -6797,7 +6796,7 @@ func TestScalarString_DoubleQuotedScalarString(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -6884,7 +6883,7 @@ func TestScalarString_DoubleQuotedScalarStringWithEscapedVar(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -6973,7 +6972,7 @@ func TestScalarString_MultilineDoubleQuotedScalarString(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -7060,7 +7059,7 @@ func TestScalarString_SingleQuotedScalarString(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -7149,7 +7148,7 @@ func TestScalarString_MultilineSingleQuotedScalarString(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -7357,7 +7356,7 @@ func TestStmtAltIf_AltIf(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -7674,7 +7673,7 @@ func TestStmtAltIf_AltElseIf(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -7930,7 +7929,7 @@ func TestStmtAltIf_AltElse(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -8406,7 +8405,7 @@ func TestStmtAltIf_AltElseElseIf(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -8810,7 +8809,7 @@ func TestStmtClassConstList(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -9181,7 +9180,7 @@ func TestStmtClassConstList_WithoutModifiers(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -9436,7 +9435,7 @@ func TestStmtClassMethod_SimpleClassMethod(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -9910,7 +9909,7 @@ func TestStmtClassMethod_PrivateProtectedClassMethod(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -10290,7 +10289,7 @@ func TestStmtClassMethod_Php7ClassMethod(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -10619,7 +10618,7 @@ func TestStmtClassMethod_AbstractClassMethod(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -10968,7 +10967,7 @@ func TestStmtClassMethod_Php7AbstractClassMethod(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -11100,7 +11099,7 @@ func TestStmtClass_SimpleClass(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -11265,7 +11264,7 @@ func TestStmtClass_AbstractClass(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -11505,7 +11504,7 @@ func TestStmtClass_ClassExtends(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -11747,7 +11746,7 @@ func TestStmtClass_ClassImplement(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -12042,7 +12041,7 @@ func TestStmtClass_ClassImplements(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -12404,7 +12403,7 @@ func TestStmtClass_AnonimousClass(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -12680,7 +12679,7 @@ func TestStmtConstList(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -12893,7 +12892,7 @@ func TestStmtContinue_Empty(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -13137,7 +13136,7 @@ func TestStmtContinue_Light(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -13397,7 +13396,7 @@ func TestStmtContinue(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -13561,7 +13560,7 @@ func TestStmtDeclare(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -13828,7 +13827,7 @@ func TestStmtDeclare_Stmts(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -14025,7 +14024,7 @@ func TestStmtDeclare_Alt(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -14205,7 +14204,7 @@ func TestStmtDo(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -14367,7 +14366,7 @@ func TestStmtEcho(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -14502,7 +14501,7 @@ func TestStmtEcho_Parenthesis(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -14589,7 +14588,7 @@ func TestStmtExpression(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -15058,7 +15057,7 @@ func TestStmtFor(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -15390,7 +15389,7 @@ func TestStmtFor_Alt(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -15619,7 +15618,7 @@ func TestStmtForeach(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -15849,7 +15848,7 @@ func TestStmtForeach_Expr(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -16100,7 +16099,7 @@ func TestStmtForeach_Alt(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -16390,7 +16389,7 @@ func TestStmtForeach_WithKey(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -16681,7 +16680,7 @@ func TestStmtForeach_ExprWithKey(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -16981,7 +16980,7 @@ func TestStmtForeach_WithRef(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -17319,7 +17318,7 @@ func TestStmtForeach_WithList(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -17471,7 +17470,7 @@ func TestStmtFunction(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -17652,7 +17651,7 @@ func TestStmtFunction_Return(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -18030,7 +18029,7 @@ func TestStmtFunction_ReturnVar(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -18252,7 +18251,7 @@ func TestStmtFunction_Ref(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -18465,7 +18464,7 @@ func TestStmtFunction_ReturnType(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -18584,7 +18583,7 @@ func TestStmtGlobal(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -18938,7 +18937,7 @@ func TestStmtGlobal_Vars(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -19096,7 +19095,7 @@ func TestStmtGotoLabel(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -19194,7 +19193,7 @@ func TestStmtHaltCompiler(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -19362,7 +19361,7 @@ func TestStmtIf(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -19662,7 +19661,7 @@ func TestStmtIf_ElseIf(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -19901,7 +19900,7 @@ func TestStmtIf_Else(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -20402,7 +20401,7 @@ func TestStmtIf_ElseElseIf(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -20933,7 +20932,7 @@ func TestStmtIf_ElseIfElseIfElse(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -21020,7 +21019,7 @@ func TestStmtInlineHtml(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -21152,7 +21151,7 @@ func TestStmtInterface(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -21349,7 +21348,7 @@ func TestStmtInterface_Extend(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -21599,7 +21598,7 @@ func TestStmtInterface_Extends(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -21718,7 +21717,7 @@ func TestStmtNamespace(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -21860,7 +21859,7 @@ func TestStmtNamespace_Stmts(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -21961,7 +21960,7 @@ func TestStmtNamespace_Anonymous(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -22182,7 +22181,7 @@ func TestStmtProperty(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -22546,7 +22545,7 @@ func TestStmtProperty_Properties(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -22910,7 +22909,7 @@ func TestStmtProperty_Properties2(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -23172,7 +23171,7 @@ func TestStmtProperty_PropertyType(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -23299,7 +23298,7 @@ func TestStmtStaticVar(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -23538,7 +23537,7 @@ func TestStmtStaticVar_Vars(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -23777,7 +23776,7 @@ func TestStmtStaticVar_Vars2(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -24186,7 +24185,7 @@ func TestStmtSwitch(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -24605,7 +24604,7 @@ func TestStmtSwitch_Semicolon(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -24984,7 +24983,7 @@ func TestStmtSwitch_Alt(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -25317,7 +25316,7 @@ func TestStmtSwitch_AltSemicolon(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -25434,7 +25433,7 @@ func TestStmtThrow(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -25566,7 +25565,7 @@ func TestStmtTrait(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -25794,7 +25793,7 @@ func TestStmtTraitUse(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -26075,7 +26074,7 @@ func TestStmtTraitUse_Uses(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -26378,7 +26377,7 @@ func TestStmtTraitUse_EmptyAdaptations(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -26797,7 +26796,7 @@ func TestStmtTraitUse_Modifier(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -27247,7 +27246,7 @@ func TestStmtTraitUse_AliasModifier(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -27911,7 +27910,7 @@ func TestStmtTraitUse_Adaptions(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -28028,7 +28027,7 @@ func TestStmtTry_Try(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -28311,7 +28310,7 @@ func TestStmtTry_TryCatch(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -28635,7 +28634,7 @@ func TestStmtTry_Php7TryCatch(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -29083,7 +29082,7 @@ func TestStmtTry_TryCatchCatch(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -29429,7 +29428,7 @@ func TestStmtTry_TryCatchFinally(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -30057,7 +30056,7 @@ func TestStmtTry_TryCatchCatchCatch(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -30184,7 +30183,7 @@ func TestStmtUnset(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -30362,7 +30361,7 @@ func TestStmtUnset_Vars(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -30550,7 +30549,7 @@ func TestStmtUnset_TrailingComma(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -30679,7 +30678,7 @@ func TestStmtUse(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -30818,7 +30817,7 @@ func TestStmtUse_FullyQualified(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -31010,7 +31009,7 @@ func TestStmtUse_FullyQualifiedAlias(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -31200,7 +31199,7 @@ func TestStmtUse_List(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -31443,7 +31442,7 @@ func TestStmtUse_ListAlias(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -31674,7 +31673,7 @@ func TestStmtUse_ListFunctionType(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -32011,7 +32010,7 @@ func TestStmtUse_ListFunctionTypeAliases(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -32242,7 +32241,7 @@ func TestStmtUse_ListConstType(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -32579,7 +32578,7 @@ func TestStmtUse_ListConstTypeAliases(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -32828,7 +32827,7 @@ func TestStmtUse_GroupUse(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -33130,7 +33129,7 @@ func TestStmtUse_GroupUseAlias(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -33410,7 +33409,7 @@ func TestStmtUse_FunctionGroupUse(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -33690,7 +33689,7 @@ func TestStmtUse_ConstGroupUse(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -34001,7 +34000,7 @@ func TestStmtUse_MixedGroupUse(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -34214,7 +34213,7 @@ func TestStmtBreak_Empty(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -34458,7 +34457,7 @@ func TestStmtBreak_Light(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -34728,7 +34727,7 @@ func TestStmtBreak(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -34872,7 +34871,7 @@ func TestExprArrayDimFetch(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -35061,7 +35060,7 @@ func TestExprArrayDimFetch_Nested(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -35167,7 +35166,7 @@ func TestExprArray(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -35302,7 +35301,7 @@ func TestExprArray_Item(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -35546,7 +35545,7 @@ func TestExprArray_Items(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -35699,7 +35698,7 @@ func TestExprArray_ItemUnpack(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -35866,7 +35865,7 @@ func TestExprArrowFunction(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -36130,7 +36129,7 @@ func TestExprArrowFunction_ReturnType(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -36243,7 +36242,7 @@ func TestExprBitwiseNot(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -36356,7 +36355,7 @@ func TestExprBooleanNot(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -36490,7 +36489,7 @@ func TestExprClassConstFetch(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -36614,7 +36613,7 @@ func TestExprClassConstFetch_Static(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -36755,7 +36754,7 @@ func TestExprClone_Brackets(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -36880,7 +36879,7 @@ func TestExprClone(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -37007,7 +37006,7 @@ func TestExprClosure(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -37402,7 +37401,7 @@ func TestExprClosure_Use(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -37797,7 +37796,7 @@ func TestExprClosure_Use2(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -37987,7 +37986,7 @@ func TestExprClosure_ReturnType(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -38092,7 +38091,7 @@ func TestExprConstFetch(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -38217,7 +38216,7 @@ func TestExprConstFetch_Relative(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -38332,7 +38331,7 @@ func TestExprConstFetch_FullyQualified(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -38465,7 +38464,7 @@ func TestExprEmpty(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -38578,7 +38577,7 @@ func TestExprErrorSuppress(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -38711,7 +38710,7 @@ func TestExprEval(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -38797,7 +38796,7 @@ func TestExprExit(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -38903,7 +38902,7 @@ func TestExprExit_Empty(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -39036,7 +39035,7 @@ func TestExprExit_Expr(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -39122,7 +39121,7 @@ func TestExprDie(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -39228,7 +39227,7 @@ func TestExprDie_Empty(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -39361,7 +39360,7 @@ func TestExprDie_Expr(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -39486,7 +39485,7 @@ func TestExprFunctionCall(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -39631,7 +39630,7 @@ func TestExprFunctionCall_Relative(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -39804,7 +39803,7 @@ func TestExprFunctionCall_FullyQualified(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -39994,7 +39993,7 @@ func TestExprFunctionCall_Var(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -40193,7 +40192,7 @@ func TestExprFunctionCall_ExprArg(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -40306,7 +40305,7 @@ func TestExprPostDec(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -40419,7 +40418,7 @@ func TestExprPostInc(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -40532,7 +40531,7 @@ func TestExprPreDec(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -40645,7 +40644,7 @@ func TestExprPreInc(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -40770,7 +40769,7 @@ func TestExprInclude(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -40895,7 +40894,7 @@ func TestExprInclude_Once(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -41020,7 +41019,7 @@ func TestExprRequire(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -41145,7 +41144,7 @@ func TestExprRequire_Once(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -41311,7 +41310,7 @@ func TestExprInstanceOf(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -41497,7 +41496,7 @@ func TestExprInstanceOf_Relative(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -41673,7 +41672,7 @@ func TestExprInstanceOf_FullyQualified(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -41808,7 +41807,7 @@ func TestExprIsset(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -41994,7 +41993,7 @@ func TestExprIsset_Variables(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -42169,7 +42168,7 @@ func TestExprList_Empty(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -42381,7 +42380,7 @@ func TestExprList(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -42621,7 +42620,7 @@ func TestExprList_ArrayIndex(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -42881,7 +42880,7 @@ func TestExprList_List(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -43118,7 +43117,7 @@ func TestExprList_EmptyItem(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -43401,7 +43400,7 @@ func TestExprList_EmptyItems(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -43553,7 +43552,7 @@ func TestExprMethodCall(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -43680,7 +43679,7 @@ func TestExprNew(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -43847,7 +43846,7 @@ func TestExprNew_Relative(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -44004,7 +44003,7 @@ func TestExprNew_FullyQualified(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -44291,7 +44290,7 @@ func TestExprNew_Anonymous(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -44432,7 +44431,7 @@ func TestExprPrint(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -44564,7 +44563,7 @@ func TestExprPropertyFetch(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -44708,7 +44707,7 @@ func TestExprShellExec(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -44804,7 +44803,7 @@ func TestExprShortArray(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -44929,7 +44928,7 @@ func TestExprShortArray_Item(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -45163,7 +45162,7 @@ func TestExprShortArray_Items(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -45365,7 +45364,7 @@ func TestExprShortList(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -45595,7 +45594,7 @@ func TestExprShortList_ArrayIndex(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -45845,7 +45844,7 @@ func TestExprShortList_List(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -45999,7 +45998,7 @@ func TestExprStaticCall(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -46173,7 +46172,7 @@ func TestExprStaticCall_Relative(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -46337,7 +46336,7 @@ func TestExprStaticCall_FullyQualified(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -46499,7 +46498,7 @@ func TestExprStaticCall_Var(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -46659,7 +46658,7 @@ func TestExprStaticCall_VarVar(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -46801,7 +46800,7 @@ func TestExprStaticPropertyFetch(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -46963,7 +46962,7 @@ func TestExprStaticPropertyFetch_Relative(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -47115,7 +47114,7 @@ func TestExprStaticPropertyFetch_FullyQualified(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -47340,7 +47339,7 @@ func TestExprTernary(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -47526,7 +47525,7 @@ func TestExprTernary_Simple(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -47881,7 +47880,7 @@ func TestExprTernary_NestedTrue(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -48236,7 +48235,7 @@ func TestExprTernary_NestedCond(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -48349,7 +48348,7 @@ func TestExprUnaryMinus(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -48462,7 +48461,7 @@ func TestExprUnaryPlus(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -48557,7 +48556,7 @@ func TestExprVariable(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -48670,7 +48669,7 @@ func TestExprVariable_Variable(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -48756,7 +48755,7 @@ func TestExprYield(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -48881,7 +48880,7 @@ func TestExprYield_Val(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -49067,7 +49066,7 @@ func TestExprYield_KeyVal(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -49184,7 +49183,7 @@ func TestExprYield_Expr(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -49362,7 +49361,7 @@ func TestExprYield_KeyExpr(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -49487,7 +49486,7 @@ func TestExprYieldFrom(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -51837,7 +51836,7 @@ func TestExprAssign_Assign(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -55306,7 +55305,7 @@ func TestExprBinary_BitwiseAnd(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -56182,7 +56181,7 @@ func TestExprCast_Array(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -56488,7 +56487,7 @@ func TestStrings(t *testing.T) {
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -56974,7 +56973,7 @@ CAD;
 			Minor: 4,
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	actual := php7parser.GetRootNode()
@@ -57006,7 +57005,7 @@ func TestControlCharsErrors(t *testing.T) {
 			parserErrors = append(parserErrors, e)
 		},
 	}
-	lexer := scanner.NewLexer([]byte(src), config)
+	lexer := php7.NewLexer([]byte(src), config)
 	php7parser := php7.NewParser(lexer, config)
 	php7parser.Parse()
 	assert.DeepEqual(t, expected, parserErrors)

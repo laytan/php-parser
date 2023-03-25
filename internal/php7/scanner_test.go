@@ -1,4 +1,4 @@
-package scanner
+package php7
 
 import (
 	"gotest.tools/assert"

@@ -6,7 +6,6 @@ import (
 	"testing"
 
 	"github.com/VKCOM/php-parser/internal/php7"
-	"github.com/VKCOM/php-parser/internal/scanner"
 	"github.com/VKCOM/php-parser/pkg/conf"
 	"github.com/VKCOM/php-parser/pkg/version"
 )
@@ -24,7 +23,7 @@ func BenchmarkPhp7(b *testing.B) {
 				Minor: 4,
 			},
 		}
-		lexer := scanner.NewLexer(src, config)
+		lexer := php7.NewLexer(src, config)
 		php7parser := php7.NewParser(lexer, config)
 		php7parser.Parse()
 	}

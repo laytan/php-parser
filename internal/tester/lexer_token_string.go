@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"github.com/VKCOM/php-parser/internal/php8"
-	"github.com/VKCOM/php-parser/internal/scanner"
+	"github.com/VKCOM/php-parser/internal/php7"
 	"github.com/VKCOM/php-parser/pkg/conf"
 	"github.com/VKCOM/php-parser/pkg/version"
 	"gotest.tools/assert"
@@ -41,7 +41,7 @@ func (l *LexerTokenStringTestSuite) Run() {
 	var lexer Lexer
 
 	if l.Version.Less(&version.Version{Major: 8, Minor: 0}) {
-		lexer = scanner.NewLexer([]byte(l.Code), config)
+		lexer = php7.NewLexer([]byte(l.Code), config)
 	} else {
 		lexer = php8.NewLexer([]byte(l.Code), config)
 	}

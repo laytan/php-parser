@@ -1,4 +1,4 @@
-package scanner
+package php7
 
 type NewLines struct {
 	data []int

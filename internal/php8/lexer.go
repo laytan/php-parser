@@ -124,11 +124,13 @@ func (lex *Lexer) isHeredocEndBefore73(p int) bool {
 		return false
 	}
 
-	if len(lex.data) > p+l && lex.data[p+l] != ';' && lex.data[p+l] != '\r' && lex.data[p+l] != '\n' {
+	if len(lex.data) > p+l && lex.data[p+l] != ';' && lex.data[p+l] != '\r' &&
+		lex.data[p+l] != '\n' {
 		return false
 	}
 
-	if len(lex.data) > p+l+1 && lex.data[p+l] == ';' && lex.data[p+l+1] != '\r' && lex.data[p+l+1] != '\n' {
+	if len(lex.data) > p+l+1 && lex.data[p+l] == ';' && lex.data[p+l+1] != '\r' &&
+		lex.data[p+l+1] != '\n' {
 		return false
 	}
 
@@ -262,5 +264,6 @@ func isValidVarNameStart(r byte) bool {
 }
 
 func isValidVarName(r byte) bool {
-	return (r >= 'A' && r <= 'Z') || (r >= 'a' && r <= 'z') || (r >= '0' && r <= '9') || r == '_' || r >= 0x80
+	return (r >= 'A' && r <= 'Z') || (r >= 'a' && r <= 'z') || (r >= '0' && r <= '9') || r == '_' ||
+		r >= 0x80
 }
