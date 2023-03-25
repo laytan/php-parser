@@ -399,3 +399,44 @@ class Bar {
 
 	suite.Run()
 }
+
+func TestConstantsInTraits(t *testing.T) {
+	suite := tester.NewParserDumpTestSuite(t)
+	suite.UsePHP8()
+	suite.Code = `<?php
+trait Foo {
+    public const CONSTANT = 1;
+}
+`
+
+    suite.Expected = `&ast.Root{
+	Stmts: []ast.Vertex{
+		&ast.StmtTrait{
+			Name: &ast.Identifier{
+				Val: []byte("Foo"),
+			},
+			Stmts: []ast.Vertex{
+				&ast.StmtClassConstList{
+					Modifiers: []ast.Vertex{
+						&ast.Identifier{
+							Val: []byte("public"),
+						},
+					},
+					Consts: []ast.Vertex{
+						&ast.StmtConstant{
+							Name: &ast.Identifier{
+								Val: []byte("CONSTANT"),
+							},
+							Expr: &ast.ScalarLnumber{
+								Val: []byte("1"),
+							},
+						},
+					},
+				},
+			},
+		},
+	},
+},`
+
+	suite.Run()
+}
