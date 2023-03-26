@@ -409,7 +409,7 @@ trait Foo {
 }
 `
 
-    suite.Expected = `&ast.Root{
+	suite.Expected = `&ast.Root{
 	Stmts: []ast.Vertex{
 		&ast.StmtTrait{
 			Name: &ast.Identifier{

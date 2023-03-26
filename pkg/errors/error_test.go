@@ -10,7 +10,7 @@ import (
 )
 
 func TestConstructor(t *testing.T) {
-	pos := position.NewPosition(1, 2, 3, 4)
+	pos := position.NewPosition(1, 2, 3, 4, 1, 2)
 
 	actual := errors.NewError("message", pos)
 
@@ -23,7 +23,7 @@ func TestConstructor(t *testing.T) {
 }
 
 func TestPrint(t *testing.T) {
-	pos := position.NewPosition(1, 2, 3, 4)
+	pos := position.NewPosition(1, 2, 3, 4, 1, 2)
 
 	Error := errors.NewError("message", pos)
 

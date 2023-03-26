@@ -366,40 +366,40 @@ $a;
 				{
 					ID:       php8.T_OPEN_TAG,
 					Value:    []byte("<?php"),
-					Position: &position.Position{StartLine: 1, EndLine: 1, EndPos: 5},
+					Position: &position.Position{StartLine: 1, EndLine: 1, EndPos: 5, StartCol: 0, EndCol: 5},
 				},
 				{
 					ID:       php8.T_WHITESPACE,
 					Value:    []byte("\n"),
-					Position: &position.Position{StartLine: 1, EndLine: 1, StartPos: 5, EndPos: 6},
+					Position: &position.Position{StartLine: 1, EndLine: 1, StartPos: 5, EndPos: 6, StartCol: 5, EndCol: 6},
 				},
 				{
 					ID:       php8.T_COMMENT,
 					Value:    []byte("#\n"),
-					Position: &position.Position{StartLine: 2, EndLine: 2, StartPos: 6, EndPos: 8},
+					Position: &position.Position{StartLine: 2, EndLine: 2, StartPos: 6, EndPos: 8, StartCol: 0, EndCol: 2},
 				},
 				{
 					ID:       php8.T_COMMENT,
 					Value:    []byte("# Hello\n"),
-					Position: &position.Position{StartLine: 3, EndLine: 3, StartPos: 8, EndPos: 16},
+					Position: &position.Position{StartLine: 3, EndLine: 3, StartPos: 8, EndPos: 16, StartCol: 0, EndCol: 8},
 				},
 				{
 					ID:       php8.T_COMMENT,
 					Value:    []byte("#\n"),
-					Position: &position.Position{StartLine: 4, EndLine: 4, StartPos: 16, EndPos: 18},
+					Position: &position.Position{StartLine: 4, EndLine: 4, StartPos: 16, EndPos: 18, StartCol: 0, EndCol: 2},
 				},
 				{
 					ID:       php8.T_WHITESPACE,
 					Value:    []byte("\n"),
-					Position: &position.Position{StartLine: 5, EndLine: 5, StartPos: 18, EndPos: 19},
+					Position: &position.Position{StartLine: 5, EndLine: 5, StartPos: 18, EndPos: 19, StartCol: 0, EndCol: 1},
 				},
 			},
-			Position: &position.Position{StartLine: 6, EndLine: 6, StartPos: 19, EndPos: 21},
+			Position: &position.Position{StartLine: 6, EndLine: 6, StartPos: 19, EndPos: 21, StartCol: 0, EndCol: 2},
 		},
 		{
 			ID:       ';',
 			Value:    []byte(";"),
-			Position: &position.Position{StartLine: 6, EndLine: 6, StartPos: 21, EndPos: 22},
+			Position: &position.Position{StartLine: 6, EndLine: 6, StartPos: 21, EndPos: 22, StartCol: 2, EndCol: 3},
 		},
 	}
 	suite.Run()

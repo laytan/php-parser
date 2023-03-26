@@ -2,10 +2,11 @@ package dumper_test
 
 import (
 	"bytes"
+	"testing"
+
 	"github.com/VKCOM/php-parser/pkg/position"
 	"github.com/VKCOM/php-parser/pkg/token"
 	"github.com/VKCOM/php-parser/pkg/visitor/dumper"
-	"testing"
 
 	"github.com/VKCOM/php-parser/pkg/ast"
 )
@@ -45,6 +46,8 @@ func TestDumper_root(t *testing.T) {
 	Position: &position.Position{
 		StartLine: 1,
 		EndLine:   2,
+		StartCol:  0,
+		EndCol:    0,
 		StartPos:  3,
 		EndPos:    4,
 	},
@@ -60,6 +63,8 @@ func TestDumper_root(t *testing.T) {
 				Position: &position.Position{
 					StartLine: 1,
 					EndLine:   2,
+					StartCol:  0,
+					EndCol:    0,
 					StartPos:  3,
 					EndPos:    4,
 				},

@@ -14,6 +14,11 @@ import (
 	"github.com/VKCOM/php-parser/pkg/version"
 )
 
+func TestMain(m *testing.M) {
+	// Ignore StartCol and EndCol in equality checks, these tests were written before they were added.
+	position.CheckColEquality = false
+}
+
 func TestIdentifier(t *testing.T) {
 	src := `<? $foo;`
 

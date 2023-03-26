@@ -1435,7 +1435,7 @@ func TestRealCastParserError(t *testing.T) {
 	suite.Expected = []*errors.Error{
 		{
 			Msg: "The (real) cast has been removed, use (float) instead",
-			Pos: position.NewPosition(2, 2, 7, 13),
+			Pos: position.NewPosition(2, 2, 7, 13, 1, 7),
 		},
 	}
 
@@ -1455,7 +1455,7 @@ func TestUnsetCastParserError(t *testing.T) {
 	suite.Expected = []*errors.Error{
 		{
 			Msg: "The (unset) cast is no longer supported",
-			Pos: position.NewPosition(2, 2, 7, 14),
+			Pos: position.NewPosition(2, 2, 7, 14, 1, 1),
 		},
 	}
 
@@ -1980,15 +1980,15 @@ new $a{10}; // Error
 	suite.Expected = []*errors.Error{
 		{
 			Msg: "Array and string offset access syntax with curly braces is no longer supported",
-			Pos: position.NewPosition(3, 3, 26, 27),
+			Pos: position.NewPosition(3, 3, 26, 27, 1, 1),
 		},
 		{
 			Msg: "Array and string offset access syntax with curly braces is no longer supported",
-			Pos: position.NewPosition(9, 9, 97, 98),
+			Pos: position.NewPosition(9, 9, 97, 98, 1, 1),
 		},
 		{
 			Msg: "Array and string offset access syntax with curly braces is no longer supported",
-			Pos: position.NewPosition(12, 12, 137, 138),
+			Pos: position.NewPosition(12, 12, 137, 138, 1, 1),
 		},
 	}
 
@@ -3020,19 +3020,19 @@ class Foo {
 	suite.Expected = []*errors.Error{
 		{
 			Msg: "syntax error: unexpected T_STATIC, expecting T_VARIABLE",
-			Pos: position.NewPosition(2, 2, 18, 24),
+			Pos: position.NewPosition(2, 2, 18, 24, 1, 1),
 		},
 		{
 			Msg: "syntax error: unexpected T_STATIC, expecting T_VARIABLE",
-			Pos: position.NewPosition(3, 3, 48, 54),
+			Pos: position.NewPosition(3, 3, 48, 54, 1, 1),
 		},
 		{
 			Msg: "syntax error: unexpected '|', expecting T_VARIABLE",
-			Pos: position.NewPosition(8, 8, 154, 155),
+			Pos: position.NewPosition(8, 8, 154, 155, 1, 1),
 		},
 		{
 			Msg: "syntax error: unexpected '}'",
-			Pos: position.NewPosition(10, 10, 182, 183),
+			Pos: position.NewPosition(10, 10, 182, 183, 1, 1),
 		},
 	}
 
@@ -3051,15 +3051,15 @@ function f(int|string|null $a) {} // ok
 	suite.Expected = []*errors.Error{
 		{
 			Msg: "syntax error: unexpected '|', expecting T_VARIABLE",
-			Pos: position.NewPosition(2, 2, 22, 23),
+			Pos: position.NewPosition(2, 2, 22, 23, 1, 1),
 		},
 		{
 			Msg: "syntax error: unexpected '('",
-			Pos: position.NewPosition(3, 3, 49, 50),
+			Pos: position.NewPosition(3, 3, 49, 50, 1, 1),
 		},
 		{
 			Msg: "syntax error: unexpected T_VARIABLE",
-			Pos: position.NewPosition(3, 3, 62, 64),
+			Pos: position.NewPosition(3, 3, 62, 64, 1, 1),
 		},
 	}
 
@@ -4537,7 +4537,7 @@ use \ Foo \ Boo;
 	suite.Expected = []*errors.Error{
 		{
 			Msg: "syntax error: unexpected T_NS_SEPARATOR",
-			Pos: position.NewPosition(2, 2, 11, 12),
+			Pos: position.NewPosition(2, 2, 11, 12, 1, 1),
 		},
 	}
 
@@ -4554,7 +4554,7 @@ function f(\Foo \ Boo $a) {}
 	suite.Expected = []*errors.Error{
 		{
 			Msg: "syntax error: unexpected T_NS_SEPARATOR, expecting T_VARIABLE",
-			Pos: position.NewPosition(2, 2, 23, 24),
+			Pos: position.NewPosition(2, 2, 23, 24, 1, 1),
 		},
 	}
 

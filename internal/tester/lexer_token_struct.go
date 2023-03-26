@@ -46,6 +46,7 @@ func (l *LexerTokenStructTestSuite) WithFreeFloating() {
 }
 
 func (l *LexerTokenStructTestSuite) Run() {
+	l.t.Helper()
 	config := conf.Config{
 		Version: &l.Version,
 	}

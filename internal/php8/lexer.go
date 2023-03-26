@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"strings"
 
+	pos "github.com/VKCOM/php-parser/internal/position"
 	"github.com/VKCOM/php-parser/pkg/conf"
 	"github.com/VKCOM/php-parser/pkg/errors"
 	"github.com/VKCOM/php-parser/pkg/position"
@@ -16,7 +17,11 @@ type Lexer struct {
 	phpVersion     *version.Version
 	errHandlerFunc func(*errors.Error)
 
-	p, pe, cs   int
+	// p: current position being lexed/checked.
+	// pe: length in bytes of input.
+	p, pe, cs int
+	// ts: start position of the current token.
+	// te: end position of the current token.
 	ts, te, act int
 	stack       []int
 	top         int
@@ -24,7 +29,7 @@ type Lexer struct {
 	heredocLabel []byte
 	tokenPool    *token.Pool
 	positionPool *position.Pool
-	newLines     NewLines
+	newLines     pos.NewLines
 }
 
 func NewLexer(data []byte, config conf.Config) *Lexer {
@@ -36,9 +41,9 @@ func NewLexer(data []byte, config conf.Config) *Lexer {
 		pe:    len(data),
 		stack: make([]int, 0),
 
-		tokenPool:    token.NewPool(position.DefaultBlockSize),
-		positionPool: position.NewPool(token.DefaultBlockSize),
-		newLines:     NewLines{make([]int, 0, 128)},
+		tokenPool:    token.NewPool(token.DefaultBlockSize),
+		positionPool: position.NewPool(position.DefaultBlockSize),
+		newLines:     pos.NewNewLines(),
 	}
 
 	initLexer(lex)
@@ -49,10 +54,15 @@ func NewLexer(data []byte, config conf.Config) *Lexer {
 func (lex *Lexer) setTokenPosition(token *token.Token) {
 	pos := lex.positionPool.Get()
 
-	pos.StartLine = lex.newLines.GetLine(lex.ts)
-	pos.EndLine = lex.newLines.GetLine(lex.te - 1)
+	sl, slb := lex.newLines.GetLine(lex.ts)
+	el, elb := lex.newLines.GetLine(lex.te - 1)
+
+	pos.StartLine = sl
+	pos.EndLine = el
 	pos.StartPos = lex.ts
 	pos.EndPos = lex.te
+	pos.StartCol = lex.ts - slb
+	pos.EndCol = lex.te - elb
 
 	token.Position = pos
 }
@@ -249,11 +259,15 @@ func (lex *Lexer) error(msg string) {
 		return
 	}
 
+	sl, slb := lex.newLines.GetLine(lex.ts)
+	el, elb := lex.newLines.GetLine(lex.te - 1)
 	pos := position.NewPosition(
-		lex.newLines.GetLine(lex.ts),
-		lex.newLines.GetLine(lex.te-1),
+		sl,
+		el,
 		lex.ts,
 		lex.te,
+		lex.ts-slb,
+		lex.te-elb,
 	)
 
 	lex.errHandlerFunc(errors.NewError(msg, pos))

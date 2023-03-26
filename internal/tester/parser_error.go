@@ -34,6 +34,7 @@ func (p *ParserErrorTestSuite) UsePHP8() {
 }
 
 func (p *ParserErrorTestSuite) Run() {
+	p.t.Helper()
 	config := conf.Config{
 		Version: &p.Version,
 	}

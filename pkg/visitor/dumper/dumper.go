@@ -148,6 +148,8 @@ func (v *Dumper) dumpPosition(pos *position.Position) {
 
 	v.print(v.indent, "StartLine: "+strconv.Itoa(pos.StartLine)+",\n")
 	v.print(v.indent, "EndLine:   "+strconv.Itoa(pos.EndLine)+",\n")
+	v.print(v.indent, "StartCol:  "+strconv.Itoa(pos.StartCol)+",\n")
+	v.print(v.indent, "EndCol:    "+strconv.Itoa(pos.EndCol)+",\n")
 	v.print(v.indent, "StartPos:  "+strconv.Itoa(pos.StartPos)+",\n")
 	v.print(v.indent, "EndPos:    "+strconv.Itoa(pos.EndPos)+",\n")
 
