@@ -2,12 +2,7 @@
 
 package traverser
 
-import (
-    "github.com/VKCOM/php-parser/pkg/ast"
-    // Importing packages here, so that go mod tidy does not remove the dependency on it.
-    // It is used in traverser_gen.go but that is ignored with go mod tidy.
-	"golang.org/x/tools/go/packages"
-)
+import "github.com/VKCOM/php-parser/pkg/ast"
 
 func (t *Traverser) Root(n *ast.Root) {
     if !t.checkEntrance(n) {

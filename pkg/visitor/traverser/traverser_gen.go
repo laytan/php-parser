@@ -1,5 +1,4 @@
-//go:build ignore
-// +build ignore
+//go:build tools
 
 package main
 
@@ -33,12 +32,7 @@ var fileTempl = template.Must(
 
 package traverser
 
-import (
-    "github.com/VKCOM/php-parser/pkg/ast"
-    // Importing packages here, so that go mod tidy does not remove the dependency on it.
-    // It is used in traverser_gen.go but that is ignored with go mod tidy.
-	"golang.org/x/tools/go/packages"
-)
+import "github.com/VKCOM/php-parser/pkg/ast"
 {{range $typ := .Types}}
 func (t *Traverser) {{$typ.FuncName}}(n *ast.{{$typ.Name}}) {
     if !t.checkEntrance(n) {
