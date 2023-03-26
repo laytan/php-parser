@@ -4,6 +4,179 @@ package ast
 
 import "github.com/VKCOM/php-parser/pkg/position"
 
+type Type int
+
+const (
+    TypeNone Type = iota
+    TypeRoot
+    TypeNullable
+    TypeUnion
+    TypeIntersection
+    TypeParameter
+    TypeIdentifier
+    TypeArgument
+    TypeAttribute
+    TypeAttributeGroup
+    TypeScalarDnumber
+    TypeScalarEncapsed
+    TypeScalarEncapsedStringPart
+    TypeScalarEncapsedStringVar
+    TypeScalarEncapsedStringBrackets
+    TypeScalarHeredoc
+    TypeScalarLnumber
+    TypeScalarMagicConstant
+    TypeScalarString
+    TypeStmtBreak
+    TypeStmtCase
+    TypeStmtCatch
+    TypeStmtEnum
+    TypeEnumCase
+    TypeStmtClass
+    TypeStmtClassConstList
+    TypeStmtClassMethod
+    TypeStmtConstList
+    TypeStmtConstant
+    TypeStmtContinue
+    TypeStmtDeclare
+    TypeStmtDefault
+    TypeStmtDo
+    TypeStmtEcho
+    TypeStmtElse
+    TypeStmtElseIf
+    TypeStmtExpression
+    TypeStmtFinally
+    TypeStmtFor
+    TypeStmtForeach
+    TypeStmtFunction
+    TypeStmtGlobal
+    TypeStmtGoto
+    TypeStmtHaltCompiler
+    TypeStmtIf
+    TypeStmtInlineHtml
+    TypeStmtInterface
+    TypeStmtLabel
+    TypeStmtNamespace
+    TypeStmtNop
+    TypeStmtProperty
+    TypeStmtPropertyList
+    TypeStmtReturn
+    TypeStmtStatic
+    TypeStmtStaticVar
+    TypeStmtStmtList
+    TypeStmtSwitch
+    TypeStmtThrow
+    TypeStmtTrait
+    TypeStmtTraitUse
+    TypeStmtTraitUseAlias
+    TypeStmtTraitUsePrecedence
+    TypeStmtTry
+    TypeStmtUnset
+    TypeStmtUseList
+    TypeStmtGroupUseList
+    TypeStmtUse
+    TypeStmtWhile
+    TypeExprArray
+    TypeExprArrayDimFetch
+    TypeExprArrayItem
+    TypeExprArrowFunction
+    TypeExprBitwiseNot
+    TypeExprBooleanNot
+    TypeExprBrackets
+    TypeExprClassConstFetch
+    TypeExprClone
+    TypeExprClosure
+    TypeExprClosureUse
+    TypeExprConstFetch
+    TypeExprEmpty
+    TypeExprErrorSuppress
+    TypeExprEval
+    TypeExprExit
+    TypeExprFunctionCall
+    TypeExprInclude
+    TypeExprIncludeOnce
+    TypeExprInstanceOf
+    TypeExprIsset
+    TypeExprList
+    TypeExprMethodCall
+    TypeExprNullsafeMethodCall
+    TypeExprNew
+    TypeExprPostDec
+    TypeExprPostInc
+    TypeExprPreDec
+    TypeExprPreInc
+    TypeExprPrint
+    TypeExprPropertyFetch
+    TypeExprNullsafePropertyFetch
+    TypeExprRequire
+    TypeExprRequireOnce
+    TypeExprShellExec
+    TypeExprStaticCall
+    TypeExprStaticPropertyFetch
+    TypeExprTernary
+    TypeExprUnaryMinus
+    TypeExprUnaryPlus
+    TypeExprVariable
+    TypeExprYield
+    TypeExprYieldFrom
+    TypeExprCastArray
+    TypeExprCastBool
+    TypeExprCastDouble
+    TypeExprCastInt
+    TypeExprCastObject
+    TypeExprCastString
+    TypeExprCastUnset
+    TypeExprAssign
+    TypeExprAssignReference
+    TypeExprAssignBitwiseAnd
+    TypeExprAssignBitwiseOr
+    TypeExprAssignBitwiseXor
+    TypeExprAssignCoalesce
+    TypeExprAssignConcat
+    TypeExprAssignDiv
+    TypeExprAssignMinus
+    TypeExprAssignMod
+    TypeExprAssignMul
+    TypeExprAssignPlus
+    TypeExprAssignPow
+    TypeExprAssignShiftLeft
+    TypeExprAssignShiftRight
+    TypeExprBinaryBitwiseAnd
+    TypeExprBinaryBitwiseOr
+    TypeExprBinaryBitwiseXor
+    TypeExprBinaryBooleanAnd
+    TypeExprBinaryBooleanOr
+    TypeExprBinaryCoalesce
+    TypeExprBinaryConcat
+    TypeExprBinaryDiv
+    TypeExprBinaryEqual
+    TypeExprBinaryGreater
+    TypeExprBinaryGreaterOrEqual
+    TypeExprBinaryIdentical
+    TypeExprBinaryLogicalAnd
+    TypeExprBinaryLogicalOr
+    TypeExprBinaryLogicalXor
+    TypeExprBinaryMinus
+    TypeExprBinaryMod
+    TypeExprBinaryMul
+    TypeExprBinaryNotEqual
+    TypeExprBinaryNotIdentical
+    TypeExprBinaryPlus
+    TypeExprBinaryPow
+    TypeExprBinaryShiftLeft
+    TypeExprBinaryShiftRight
+    TypeExprBinarySmaller
+    TypeExprBinarySmallerOrEqual
+    TypeExprBinarySpaceship
+    TypeExprMatch
+    TypeExprThrow
+    TypeMatchArm
+    TypeName
+    TypeNameFullyQualified
+    TypeNameRelative
+    TypeNamePart
+    TypeCount
+)
+
 var _ Vertex = &Root{}
 
 func (n *Root) Accept(v Visitor) {
@@ -12,6 +185,10 @@ func (n *Root) Accept(v Visitor) {
 
 func (n *Root) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *Root) GetType() Type {
+    return TypeRoot
 }
 
 var _ Vertex = &Nullable{}
@@ -24,6 +201,10 @@ func (n *Nullable) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *Nullable) GetType() Type {
+    return TypeNullable
+}
+
 var _ Vertex = &Union{}
 
 func (n *Union) Accept(v Visitor) {
@@ -32,6 +213,10 @@ func (n *Union) Accept(v Visitor) {
 
 func (n *Union) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *Union) GetType() Type {
+    return TypeUnion
 }
 
 var _ Vertex = &Intersection{}
@@ -44,6 +229,10 @@ func (n *Intersection) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *Intersection) GetType() Type {
+    return TypeIntersection
+}
+
 var _ Vertex = &Parameter{}
 
 func (n *Parameter) Accept(v Visitor) {
@@ -52,6 +241,10 @@ func (n *Parameter) Accept(v Visitor) {
 
 func (n *Parameter) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *Parameter) GetType() Type {
+    return TypeParameter
 }
 
 var _ Vertex = &Identifier{}
@@ -64,6 +257,10 @@ func (n *Identifier) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *Identifier) GetType() Type {
+    return TypeIdentifier
+}
+
 var _ Vertex = &Argument{}
 
 func (n *Argument) Accept(v Visitor) {
@@ -72,6 +269,10 @@ func (n *Argument) Accept(v Visitor) {
 
 func (n *Argument) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *Argument) GetType() Type {
+    return TypeArgument
 }
 
 var _ Vertex = &Attribute{}
@@ -84,6 +285,10 @@ func (n *Attribute) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *Attribute) GetType() Type {
+    return TypeAttribute
+}
+
 var _ Vertex = &AttributeGroup{}
 
 func (n *AttributeGroup) Accept(v Visitor) {
@@ -92,6 +297,10 @@ func (n *AttributeGroup) Accept(v Visitor) {
 
 func (n *AttributeGroup) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *AttributeGroup) GetType() Type {
+    return TypeAttributeGroup
 }
 
 var _ Vertex = &ScalarDnumber{}
@@ -104,6 +313,10 @@ func (n *ScalarDnumber) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *ScalarDnumber) GetType() Type {
+    return TypeScalarDnumber
+}
+
 var _ Vertex = &ScalarEncapsed{}
 
 func (n *ScalarEncapsed) Accept(v Visitor) {
@@ -112,6 +325,10 @@ func (n *ScalarEncapsed) Accept(v Visitor) {
 
 func (n *ScalarEncapsed) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *ScalarEncapsed) GetType() Type {
+    return TypeScalarEncapsed
 }
 
 var _ Vertex = &ScalarEncapsedStringPart{}
@@ -124,6 +341,10 @@ func (n *ScalarEncapsedStringPart) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *ScalarEncapsedStringPart) GetType() Type {
+    return TypeScalarEncapsedStringPart
+}
+
 var _ Vertex = &ScalarEncapsedStringVar{}
 
 func (n *ScalarEncapsedStringVar) Accept(v Visitor) {
@@ -132,6 +353,10 @@ func (n *ScalarEncapsedStringVar) Accept(v Visitor) {
 
 func (n *ScalarEncapsedStringVar) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *ScalarEncapsedStringVar) GetType() Type {
+    return TypeScalarEncapsedStringVar
 }
 
 var _ Vertex = &ScalarEncapsedStringBrackets{}
@@ -144,6 +369,10 @@ func (n *ScalarEncapsedStringBrackets) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *ScalarEncapsedStringBrackets) GetType() Type {
+    return TypeScalarEncapsedStringBrackets
+}
+
 var _ Vertex = &ScalarHeredoc{}
 
 func (n *ScalarHeredoc) Accept(v Visitor) {
@@ -152,6 +381,10 @@ func (n *ScalarHeredoc) Accept(v Visitor) {
 
 func (n *ScalarHeredoc) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *ScalarHeredoc) GetType() Type {
+    return TypeScalarHeredoc
 }
 
 var _ Vertex = &ScalarLnumber{}
@@ -164,6 +397,10 @@ func (n *ScalarLnumber) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *ScalarLnumber) GetType() Type {
+    return TypeScalarLnumber
+}
+
 var _ Vertex = &ScalarMagicConstant{}
 
 func (n *ScalarMagicConstant) Accept(v Visitor) {
@@ -172,6 +409,10 @@ func (n *ScalarMagicConstant) Accept(v Visitor) {
 
 func (n *ScalarMagicConstant) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *ScalarMagicConstant) GetType() Type {
+    return TypeScalarMagicConstant
 }
 
 var _ Vertex = &ScalarString{}
@@ -184,6 +425,10 @@ func (n *ScalarString) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *ScalarString) GetType() Type {
+    return TypeScalarString
+}
+
 var _ Vertex = &StmtBreak{}
 
 func (n *StmtBreak) Accept(v Visitor) {
@@ -192,6 +437,10 @@ func (n *StmtBreak) Accept(v Visitor) {
 
 func (n *StmtBreak) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *StmtBreak) GetType() Type {
+    return TypeStmtBreak
 }
 
 var _ Vertex = &StmtCase{}
@@ -204,6 +453,10 @@ func (n *StmtCase) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *StmtCase) GetType() Type {
+    return TypeStmtCase
+}
+
 var _ Vertex = &StmtCatch{}
 
 func (n *StmtCatch) Accept(v Visitor) {
@@ -212,6 +465,10 @@ func (n *StmtCatch) Accept(v Visitor) {
 
 func (n *StmtCatch) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *StmtCatch) GetType() Type {
+    return TypeStmtCatch
 }
 
 var _ Vertex = &StmtEnum{}
@@ -224,6 +481,10 @@ func (n *StmtEnum) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *StmtEnum) GetType() Type {
+    return TypeStmtEnum
+}
+
 var _ Vertex = &EnumCase{}
 
 func (n *EnumCase) Accept(v Visitor) {
@@ -232,6 +493,10 @@ func (n *EnumCase) Accept(v Visitor) {
 
 func (n *EnumCase) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *EnumCase) GetType() Type {
+    return TypeEnumCase
 }
 
 var _ Vertex = &StmtClass{}
@@ -244,6 +509,10 @@ func (n *StmtClass) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *StmtClass) GetType() Type {
+    return TypeStmtClass
+}
+
 var _ Vertex = &StmtClassConstList{}
 
 func (n *StmtClassConstList) Accept(v Visitor) {
@@ -252,6 +521,10 @@ func (n *StmtClassConstList) Accept(v Visitor) {
 
 func (n *StmtClassConstList) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *StmtClassConstList) GetType() Type {
+    return TypeStmtClassConstList
 }
 
 var _ Vertex = &StmtClassMethod{}
@@ -264,6 +537,10 @@ func (n *StmtClassMethod) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *StmtClassMethod) GetType() Type {
+    return TypeStmtClassMethod
+}
+
 var _ Vertex = &StmtConstList{}
 
 func (n *StmtConstList) Accept(v Visitor) {
@@ -272,6 +549,10 @@ func (n *StmtConstList) Accept(v Visitor) {
 
 func (n *StmtConstList) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *StmtConstList) GetType() Type {
+    return TypeStmtConstList
 }
 
 var _ Vertex = &StmtConstant{}
@@ -284,6 +565,10 @@ func (n *StmtConstant) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *StmtConstant) GetType() Type {
+    return TypeStmtConstant
+}
+
 var _ Vertex = &StmtContinue{}
 
 func (n *StmtContinue) Accept(v Visitor) {
@@ -292,6 +577,10 @@ func (n *StmtContinue) Accept(v Visitor) {
 
 func (n *StmtContinue) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *StmtContinue) GetType() Type {
+    return TypeStmtContinue
 }
 
 var _ Vertex = &StmtDeclare{}
@@ -304,6 +593,10 @@ func (n *StmtDeclare) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *StmtDeclare) GetType() Type {
+    return TypeStmtDeclare
+}
+
 var _ Vertex = &StmtDefault{}
 
 func (n *StmtDefault) Accept(v Visitor) {
@@ -312,6 +605,10 @@ func (n *StmtDefault) Accept(v Visitor) {
 
 func (n *StmtDefault) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *StmtDefault) GetType() Type {
+    return TypeStmtDefault
 }
 
 var _ Vertex = &StmtDo{}
@@ -324,6 +621,10 @@ func (n *StmtDo) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *StmtDo) GetType() Type {
+    return TypeStmtDo
+}
+
 var _ Vertex = &StmtEcho{}
 
 func (n *StmtEcho) Accept(v Visitor) {
@@ -332,6 +633,10 @@ func (n *StmtEcho) Accept(v Visitor) {
 
 func (n *StmtEcho) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *StmtEcho) GetType() Type {
+    return TypeStmtEcho
 }
 
 var _ Vertex = &StmtElse{}
@@ -344,6 +649,10 @@ func (n *StmtElse) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *StmtElse) GetType() Type {
+    return TypeStmtElse
+}
+
 var _ Vertex = &StmtElseIf{}
 
 func (n *StmtElseIf) Accept(v Visitor) {
@@ -352,6 +661,10 @@ func (n *StmtElseIf) Accept(v Visitor) {
 
 func (n *StmtElseIf) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *StmtElseIf) GetType() Type {
+    return TypeStmtElseIf
 }
 
 var _ Vertex = &StmtExpression{}
@@ -364,6 +677,10 @@ func (n *StmtExpression) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *StmtExpression) GetType() Type {
+    return TypeStmtExpression
+}
+
 var _ Vertex = &StmtFinally{}
 
 func (n *StmtFinally) Accept(v Visitor) {
@@ -372,6 +689,10 @@ func (n *StmtFinally) Accept(v Visitor) {
 
 func (n *StmtFinally) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *StmtFinally) GetType() Type {
+    return TypeStmtFinally
 }
 
 var _ Vertex = &StmtFor{}
@@ -384,6 +705,10 @@ func (n *StmtFor) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *StmtFor) GetType() Type {
+    return TypeStmtFor
+}
+
 var _ Vertex = &StmtForeach{}
 
 func (n *StmtForeach) Accept(v Visitor) {
@@ -392,6 +717,10 @@ func (n *StmtForeach) Accept(v Visitor) {
 
 func (n *StmtForeach) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *StmtForeach) GetType() Type {
+    return TypeStmtForeach
 }
 
 var _ Vertex = &StmtFunction{}
@@ -404,6 +733,10 @@ func (n *StmtFunction) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *StmtFunction) GetType() Type {
+    return TypeStmtFunction
+}
+
 var _ Vertex = &StmtGlobal{}
 
 func (n *StmtGlobal) Accept(v Visitor) {
@@ -412,6 +745,10 @@ func (n *StmtGlobal) Accept(v Visitor) {
 
 func (n *StmtGlobal) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *StmtGlobal) GetType() Type {
+    return TypeStmtGlobal
 }
 
 var _ Vertex = &StmtGoto{}
@@ -424,6 +761,10 @@ func (n *StmtGoto) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *StmtGoto) GetType() Type {
+    return TypeStmtGoto
+}
+
 var _ Vertex = &StmtHaltCompiler{}
 
 func (n *StmtHaltCompiler) Accept(v Visitor) {
@@ -432,6 +773,10 @@ func (n *StmtHaltCompiler) Accept(v Visitor) {
 
 func (n *StmtHaltCompiler) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *StmtHaltCompiler) GetType() Type {
+    return TypeStmtHaltCompiler
 }
 
 var _ Vertex = &StmtIf{}
@@ -444,6 +789,10 @@ func (n *StmtIf) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *StmtIf) GetType() Type {
+    return TypeStmtIf
+}
+
 var _ Vertex = &StmtInlineHtml{}
 
 func (n *StmtInlineHtml) Accept(v Visitor) {
@@ -452,6 +801,10 @@ func (n *StmtInlineHtml) Accept(v Visitor) {
 
 func (n *StmtInlineHtml) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *StmtInlineHtml) GetType() Type {
+    return TypeStmtInlineHtml
 }
 
 var _ Vertex = &StmtInterface{}
@@ -464,6 +817,10 @@ func (n *StmtInterface) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *StmtInterface) GetType() Type {
+    return TypeStmtInterface
+}
+
 var _ Vertex = &StmtLabel{}
 
 func (n *StmtLabel) Accept(v Visitor) {
@@ -472,6 +829,10 @@ func (n *StmtLabel) Accept(v Visitor) {
 
 func (n *StmtLabel) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *StmtLabel) GetType() Type {
+    return TypeStmtLabel
 }
 
 var _ Vertex = &StmtNamespace{}
@@ -484,6 +845,10 @@ func (n *StmtNamespace) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *StmtNamespace) GetType() Type {
+    return TypeStmtNamespace
+}
+
 var _ Vertex = &StmtNop{}
 
 func (n *StmtNop) Accept(v Visitor) {
@@ -492,6 +857,10 @@ func (n *StmtNop) Accept(v Visitor) {
 
 func (n *StmtNop) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *StmtNop) GetType() Type {
+    return TypeStmtNop
 }
 
 var _ Vertex = &StmtProperty{}
@@ -504,6 +873,10 @@ func (n *StmtProperty) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *StmtProperty) GetType() Type {
+    return TypeStmtProperty
+}
+
 var _ Vertex = &StmtPropertyList{}
 
 func (n *StmtPropertyList) Accept(v Visitor) {
@@ -512,6 +885,10 @@ func (n *StmtPropertyList) Accept(v Visitor) {
 
 func (n *StmtPropertyList) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *StmtPropertyList) GetType() Type {
+    return TypeStmtPropertyList
 }
 
 var _ Vertex = &StmtReturn{}
@@ -524,6 +901,10 @@ func (n *StmtReturn) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *StmtReturn) GetType() Type {
+    return TypeStmtReturn
+}
+
 var _ Vertex = &StmtStatic{}
 
 func (n *StmtStatic) Accept(v Visitor) {
@@ -532,6 +913,10 @@ func (n *StmtStatic) Accept(v Visitor) {
 
 func (n *StmtStatic) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *StmtStatic) GetType() Type {
+    return TypeStmtStatic
 }
 
 var _ Vertex = &StmtStaticVar{}
@@ -544,6 +929,10 @@ func (n *StmtStaticVar) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *StmtStaticVar) GetType() Type {
+    return TypeStmtStaticVar
+}
+
 var _ Vertex = &StmtStmtList{}
 
 func (n *StmtStmtList) Accept(v Visitor) {
@@ -552,6 +941,10 @@ func (n *StmtStmtList) Accept(v Visitor) {
 
 func (n *StmtStmtList) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *StmtStmtList) GetType() Type {
+    return TypeStmtStmtList
 }
 
 var _ Vertex = &StmtSwitch{}
@@ -564,6 +957,10 @@ func (n *StmtSwitch) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *StmtSwitch) GetType() Type {
+    return TypeStmtSwitch
+}
+
 var _ Vertex = &StmtThrow{}
 
 func (n *StmtThrow) Accept(v Visitor) {
@@ -572,6 +969,10 @@ func (n *StmtThrow) Accept(v Visitor) {
 
 func (n *StmtThrow) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *StmtThrow) GetType() Type {
+    return TypeStmtThrow
 }
 
 var _ Vertex = &StmtTrait{}
@@ -584,6 +985,10 @@ func (n *StmtTrait) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *StmtTrait) GetType() Type {
+    return TypeStmtTrait
+}
+
 var _ Vertex = &StmtTraitUse{}
 
 func (n *StmtTraitUse) Accept(v Visitor) {
@@ -592,6 +997,10 @@ func (n *StmtTraitUse) Accept(v Visitor) {
 
 func (n *StmtTraitUse) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *StmtTraitUse) GetType() Type {
+    return TypeStmtTraitUse
 }
 
 var _ Vertex = &StmtTraitUseAlias{}
@@ -604,6 +1013,10 @@ func (n *StmtTraitUseAlias) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *StmtTraitUseAlias) GetType() Type {
+    return TypeStmtTraitUseAlias
+}
+
 var _ Vertex = &StmtTraitUsePrecedence{}
 
 func (n *StmtTraitUsePrecedence) Accept(v Visitor) {
@@ -612,6 +1025,10 @@ func (n *StmtTraitUsePrecedence) Accept(v Visitor) {
 
 func (n *StmtTraitUsePrecedence) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *StmtTraitUsePrecedence) GetType() Type {
+    return TypeStmtTraitUsePrecedence
 }
 
 var _ Vertex = &StmtTry{}
@@ -624,6 +1041,10 @@ func (n *StmtTry) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *StmtTry) GetType() Type {
+    return TypeStmtTry
+}
+
 var _ Vertex = &StmtUnset{}
 
 func (n *StmtUnset) Accept(v Visitor) {
@@ -632,6 +1053,10 @@ func (n *StmtUnset) Accept(v Visitor) {
 
 func (n *StmtUnset) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *StmtUnset) GetType() Type {
+    return TypeStmtUnset
 }
 
 var _ Vertex = &StmtUseList{}
@@ -644,6 +1069,10 @@ func (n *StmtUseList) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *StmtUseList) GetType() Type {
+    return TypeStmtUseList
+}
+
 var _ Vertex = &StmtGroupUseList{}
 
 func (n *StmtGroupUseList) Accept(v Visitor) {
@@ -652,6 +1081,10 @@ func (n *StmtGroupUseList) Accept(v Visitor) {
 
 func (n *StmtGroupUseList) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *StmtGroupUseList) GetType() Type {
+    return TypeStmtGroupUseList
 }
 
 var _ Vertex = &StmtUse{}
@@ -664,6 +1097,10 @@ func (n *StmtUse) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *StmtUse) GetType() Type {
+    return TypeStmtUse
+}
+
 var _ Vertex = &StmtWhile{}
 
 func (n *StmtWhile) Accept(v Visitor) {
@@ -672,6 +1109,10 @@ func (n *StmtWhile) Accept(v Visitor) {
 
 func (n *StmtWhile) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *StmtWhile) GetType() Type {
+    return TypeStmtWhile
 }
 
 var _ Vertex = &ExprArray{}
@@ -684,6 +1125,10 @@ func (n *ExprArray) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *ExprArray) GetType() Type {
+    return TypeExprArray
+}
+
 var _ Vertex = &ExprArrayDimFetch{}
 
 func (n *ExprArrayDimFetch) Accept(v Visitor) {
@@ -692,6 +1137,10 @@ func (n *ExprArrayDimFetch) Accept(v Visitor) {
 
 func (n *ExprArrayDimFetch) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *ExprArrayDimFetch) GetType() Type {
+    return TypeExprArrayDimFetch
 }
 
 var _ Vertex = &ExprArrayItem{}
@@ -704,6 +1153,10 @@ func (n *ExprArrayItem) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *ExprArrayItem) GetType() Type {
+    return TypeExprArrayItem
+}
+
 var _ Vertex = &ExprArrowFunction{}
 
 func (n *ExprArrowFunction) Accept(v Visitor) {
@@ -712,6 +1165,10 @@ func (n *ExprArrowFunction) Accept(v Visitor) {
 
 func (n *ExprArrowFunction) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *ExprArrowFunction) GetType() Type {
+    return TypeExprArrowFunction
 }
 
 var _ Vertex = &ExprBitwiseNot{}
@@ -724,6 +1181,10 @@ func (n *ExprBitwiseNot) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *ExprBitwiseNot) GetType() Type {
+    return TypeExprBitwiseNot
+}
+
 var _ Vertex = &ExprBooleanNot{}
 
 func (n *ExprBooleanNot) Accept(v Visitor) {
@@ -732,6 +1193,10 @@ func (n *ExprBooleanNot) Accept(v Visitor) {
 
 func (n *ExprBooleanNot) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *ExprBooleanNot) GetType() Type {
+    return TypeExprBooleanNot
 }
 
 var _ Vertex = &ExprBrackets{}
@@ -744,6 +1209,10 @@ func (n *ExprBrackets) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *ExprBrackets) GetType() Type {
+    return TypeExprBrackets
+}
+
 var _ Vertex = &ExprClassConstFetch{}
 
 func (n *ExprClassConstFetch) Accept(v Visitor) {
@@ -752,6 +1221,10 @@ func (n *ExprClassConstFetch) Accept(v Visitor) {
 
 func (n *ExprClassConstFetch) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *ExprClassConstFetch) GetType() Type {
+    return TypeExprClassConstFetch
 }
 
 var _ Vertex = &ExprClone{}
@@ -764,6 +1237,10 @@ func (n *ExprClone) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *ExprClone) GetType() Type {
+    return TypeExprClone
+}
+
 var _ Vertex = &ExprClosure{}
 
 func (n *ExprClosure) Accept(v Visitor) {
@@ -772,6 +1249,10 @@ func (n *ExprClosure) Accept(v Visitor) {
 
 func (n *ExprClosure) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *ExprClosure) GetType() Type {
+    return TypeExprClosure
 }
 
 var _ Vertex = &ExprClosureUse{}
@@ -784,6 +1265,10 @@ func (n *ExprClosureUse) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *ExprClosureUse) GetType() Type {
+    return TypeExprClosureUse
+}
+
 var _ Vertex = &ExprConstFetch{}
 
 func (n *ExprConstFetch) Accept(v Visitor) {
@@ -792,6 +1277,10 @@ func (n *ExprConstFetch) Accept(v Visitor) {
 
 func (n *ExprConstFetch) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *ExprConstFetch) GetType() Type {
+    return TypeExprConstFetch
 }
 
 var _ Vertex = &ExprEmpty{}
@@ -804,6 +1293,10 @@ func (n *ExprEmpty) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *ExprEmpty) GetType() Type {
+    return TypeExprEmpty
+}
+
 var _ Vertex = &ExprErrorSuppress{}
 
 func (n *ExprErrorSuppress) Accept(v Visitor) {
@@ -812,6 +1305,10 @@ func (n *ExprErrorSuppress) Accept(v Visitor) {
 
 func (n *ExprErrorSuppress) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *ExprErrorSuppress) GetType() Type {
+    return TypeExprErrorSuppress
 }
 
 var _ Vertex = &ExprEval{}
@@ -824,6 +1321,10 @@ func (n *ExprEval) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *ExprEval) GetType() Type {
+    return TypeExprEval
+}
+
 var _ Vertex = &ExprExit{}
 
 func (n *ExprExit) Accept(v Visitor) {
@@ -832,6 +1333,10 @@ func (n *ExprExit) Accept(v Visitor) {
 
 func (n *ExprExit) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *ExprExit) GetType() Type {
+    return TypeExprExit
 }
 
 var _ Vertex = &ExprFunctionCall{}
@@ -844,6 +1349,10 @@ func (n *ExprFunctionCall) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *ExprFunctionCall) GetType() Type {
+    return TypeExprFunctionCall
+}
+
 var _ Vertex = &ExprInclude{}
 
 func (n *ExprInclude) Accept(v Visitor) {
@@ -852,6 +1361,10 @@ func (n *ExprInclude) Accept(v Visitor) {
 
 func (n *ExprInclude) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *ExprInclude) GetType() Type {
+    return TypeExprInclude
 }
 
 var _ Vertex = &ExprIncludeOnce{}
@@ -864,6 +1377,10 @@ func (n *ExprIncludeOnce) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *ExprIncludeOnce) GetType() Type {
+    return TypeExprIncludeOnce
+}
+
 var _ Vertex = &ExprInstanceOf{}
 
 func (n *ExprInstanceOf) Accept(v Visitor) {
@@ -872,6 +1389,10 @@ func (n *ExprInstanceOf) Accept(v Visitor) {
 
 func (n *ExprInstanceOf) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *ExprInstanceOf) GetType() Type {
+    return TypeExprInstanceOf
 }
 
 var _ Vertex = &ExprIsset{}
@@ -884,6 +1405,10 @@ func (n *ExprIsset) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *ExprIsset) GetType() Type {
+    return TypeExprIsset
+}
+
 var _ Vertex = &ExprList{}
 
 func (n *ExprList) Accept(v Visitor) {
@@ -892,6 +1417,10 @@ func (n *ExprList) Accept(v Visitor) {
 
 func (n *ExprList) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *ExprList) GetType() Type {
+    return TypeExprList
 }
 
 var _ Vertex = &ExprMethodCall{}
@@ -904,6 +1433,10 @@ func (n *ExprMethodCall) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *ExprMethodCall) GetType() Type {
+    return TypeExprMethodCall
+}
+
 var _ Vertex = &ExprNullsafeMethodCall{}
 
 func (n *ExprNullsafeMethodCall) Accept(v Visitor) {
@@ -912,6 +1445,10 @@ func (n *ExprNullsafeMethodCall) Accept(v Visitor) {
 
 func (n *ExprNullsafeMethodCall) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *ExprNullsafeMethodCall) GetType() Type {
+    return TypeExprNullsafeMethodCall
 }
 
 var _ Vertex = &ExprNew{}
@@ -924,6 +1461,10 @@ func (n *ExprNew) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *ExprNew) GetType() Type {
+    return TypeExprNew
+}
+
 var _ Vertex = &ExprPostDec{}
 
 func (n *ExprPostDec) Accept(v Visitor) {
@@ -932,6 +1473,10 @@ func (n *ExprPostDec) Accept(v Visitor) {
 
 func (n *ExprPostDec) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *ExprPostDec) GetType() Type {
+    return TypeExprPostDec
 }
 
 var _ Vertex = &ExprPostInc{}
@@ -944,6 +1489,10 @@ func (n *ExprPostInc) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *ExprPostInc) GetType() Type {
+    return TypeExprPostInc
+}
+
 var _ Vertex = &ExprPreDec{}
 
 func (n *ExprPreDec) Accept(v Visitor) {
@@ -952,6 +1501,10 @@ func (n *ExprPreDec) Accept(v Visitor) {
 
 func (n *ExprPreDec) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *ExprPreDec) GetType() Type {
+    return TypeExprPreDec
 }
 
 var _ Vertex = &ExprPreInc{}
@@ -964,6 +1517,10 @@ func (n *ExprPreInc) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *ExprPreInc) GetType() Type {
+    return TypeExprPreInc
+}
+
 var _ Vertex = &ExprPrint{}
 
 func (n *ExprPrint) Accept(v Visitor) {
@@ -972,6 +1529,10 @@ func (n *ExprPrint) Accept(v Visitor) {
 
 func (n *ExprPrint) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *ExprPrint) GetType() Type {
+    return TypeExprPrint
 }
 
 var _ Vertex = &ExprPropertyFetch{}
@@ -984,6 +1545,10 @@ func (n *ExprPropertyFetch) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *ExprPropertyFetch) GetType() Type {
+    return TypeExprPropertyFetch
+}
+
 var _ Vertex = &ExprNullsafePropertyFetch{}
 
 func (n *ExprNullsafePropertyFetch) Accept(v Visitor) {
@@ -992,6 +1557,10 @@ func (n *ExprNullsafePropertyFetch) Accept(v Visitor) {
 
 func (n *ExprNullsafePropertyFetch) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *ExprNullsafePropertyFetch) GetType() Type {
+    return TypeExprNullsafePropertyFetch
 }
 
 var _ Vertex = &ExprRequire{}
@@ -1004,6 +1573,10 @@ func (n *ExprRequire) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *ExprRequire) GetType() Type {
+    return TypeExprRequire
+}
+
 var _ Vertex = &ExprRequireOnce{}
 
 func (n *ExprRequireOnce) Accept(v Visitor) {
@@ -1012,6 +1585,10 @@ func (n *ExprRequireOnce) Accept(v Visitor) {
 
 func (n *ExprRequireOnce) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *ExprRequireOnce) GetType() Type {
+    return TypeExprRequireOnce
 }
 
 var _ Vertex = &ExprShellExec{}
@@ -1024,6 +1601,10 @@ func (n *ExprShellExec) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *ExprShellExec) GetType() Type {
+    return TypeExprShellExec
+}
+
 var _ Vertex = &ExprStaticCall{}
 
 func (n *ExprStaticCall) Accept(v Visitor) {
@@ -1032,6 +1613,10 @@ func (n *ExprStaticCall) Accept(v Visitor) {
 
 func (n *ExprStaticCall) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *ExprStaticCall) GetType() Type {
+    return TypeExprStaticCall
 }
 
 var _ Vertex = &ExprStaticPropertyFetch{}
@@ -1044,6 +1629,10 @@ func (n *ExprStaticPropertyFetch) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *ExprStaticPropertyFetch) GetType() Type {
+    return TypeExprStaticPropertyFetch
+}
+
 var _ Vertex = &ExprTernary{}
 
 func (n *ExprTernary) Accept(v Visitor) {
@@ -1052,6 +1641,10 @@ func (n *ExprTernary) Accept(v Visitor) {
 
 func (n *ExprTernary) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *ExprTernary) GetType() Type {
+    return TypeExprTernary
 }
 
 var _ Vertex = &ExprUnaryMinus{}
@@ -1064,6 +1657,10 @@ func (n *ExprUnaryMinus) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *ExprUnaryMinus) GetType() Type {
+    return TypeExprUnaryMinus
+}
+
 var _ Vertex = &ExprUnaryPlus{}
 
 func (n *ExprUnaryPlus) Accept(v Visitor) {
@@ -1072,6 +1669,10 @@ func (n *ExprUnaryPlus) Accept(v Visitor) {
 
 func (n *ExprUnaryPlus) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *ExprUnaryPlus) GetType() Type {
+    return TypeExprUnaryPlus
 }
 
 var _ Vertex = &ExprVariable{}
@@ -1084,6 +1685,10 @@ func (n *ExprVariable) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *ExprVariable) GetType() Type {
+    return TypeExprVariable
+}
+
 var _ Vertex = &ExprYield{}
 
 func (n *ExprYield) Accept(v Visitor) {
@@ -1092,6 +1697,10 @@ func (n *ExprYield) Accept(v Visitor) {
 
 func (n *ExprYield) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *ExprYield) GetType() Type {
+    return TypeExprYield
 }
 
 var _ Vertex = &ExprYieldFrom{}
@@ -1104,6 +1713,10 @@ func (n *ExprYieldFrom) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *ExprYieldFrom) GetType() Type {
+    return TypeExprYieldFrom
+}
+
 var _ Vertex = &ExprCastArray{}
 
 func (n *ExprCastArray) Accept(v Visitor) {
@@ -1112,6 +1725,10 @@ func (n *ExprCastArray) Accept(v Visitor) {
 
 func (n *ExprCastArray) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *ExprCastArray) GetType() Type {
+    return TypeExprCastArray
 }
 
 var _ Vertex = &ExprCastBool{}
@@ -1124,6 +1741,10 @@ func (n *ExprCastBool) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *ExprCastBool) GetType() Type {
+    return TypeExprCastBool
+}
+
 var _ Vertex = &ExprCastDouble{}
 
 func (n *ExprCastDouble) Accept(v Visitor) {
@@ -1132,6 +1753,10 @@ func (n *ExprCastDouble) Accept(v Visitor) {
 
 func (n *ExprCastDouble) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *ExprCastDouble) GetType() Type {
+    return TypeExprCastDouble
 }
 
 var _ Vertex = &ExprCastInt{}
@@ -1144,6 +1769,10 @@ func (n *ExprCastInt) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *ExprCastInt) GetType() Type {
+    return TypeExprCastInt
+}
+
 var _ Vertex = &ExprCastObject{}
 
 func (n *ExprCastObject) Accept(v Visitor) {
@@ -1152,6 +1781,10 @@ func (n *ExprCastObject) Accept(v Visitor) {
 
 func (n *ExprCastObject) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *ExprCastObject) GetType() Type {
+    return TypeExprCastObject
 }
 
 var _ Vertex = &ExprCastString{}
@@ -1164,6 +1797,10 @@ func (n *ExprCastString) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *ExprCastString) GetType() Type {
+    return TypeExprCastString
+}
+
 var _ Vertex = &ExprCastUnset{}
 
 func (n *ExprCastUnset) Accept(v Visitor) {
@@ -1172,6 +1809,10 @@ func (n *ExprCastUnset) Accept(v Visitor) {
 
 func (n *ExprCastUnset) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *ExprCastUnset) GetType() Type {
+    return TypeExprCastUnset
 }
 
 var _ Vertex = &ExprAssign{}
@@ -1184,6 +1825,10 @@ func (n *ExprAssign) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *ExprAssign) GetType() Type {
+    return TypeExprAssign
+}
+
 var _ Vertex = &ExprAssignReference{}
 
 func (n *ExprAssignReference) Accept(v Visitor) {
@@ -1192,6 +1837,10 @@ func (n *ExprAssignReference) Accept(v Visitor) {
 
 func (n *ExprAssignReference) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *ExprAssignReference) GetType() Type {
+    return TypeExprAssignReference
 }
 
 var _ Vertex = &ExprAssignBitwiseAnd{}
@@ -1204,6 +1853,10 @@ func (n *ExprAssignBitwiseAnd) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *ExprAssignBitwiseAnd) GetType() Type {
+    return TypeExprAssignBitwiseAnd
+}
+
 var _ Vertex = &ExprAssignBitwiseOr{}
 
 func (n *ExprAssignBitwiseOr) Accept(v Visitor) {
@@ -1212,6 +1865,10 @@ func (n *ExprAssignBitwiseOr) Accept(v Visitor) {
 
 func (n *ExprAssignBitwiseOr) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *ExprAssignBitwiseOr) GetType() Type {
+    return TypeExprAssignBitwiseOr
 }
 
 var _ Vertex = &ExprAssignBitwiseXor{}
@@ -1224,6 +1881,10 @@ func (n *ExprAssignBitwiseXor) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *ExprAssignBitwiseXor) GetType() Type {
+    return TypeExprAssignBitwiseXor
+}
+
 var _ Vertex = &ExprAssignCoalesce{}
 
 func (n *ExprAssignCoalesce) Accept(v Visitor) {
@@ -1232,6 +1893,10 @@ func (n *ExprAssignCoalesce) Accept(v Visitor) {
 
 func (n *ExprAssignCoalesce) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *ExprAssignCoalesce) GetType() Type {
+    return TypeExprAssignCoalesce
 }
 
 var _ Vertex = &ExprAssignConcat{}
@@ -1244,6 +1909,10 @@ func (n *ExprAssignConcat) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *ExprAssignConcat) GetType() Type {
+    return TypeExprAssignConcat
+}
+
 var _ Vertex = &ExprAssignDiv{}
 
 func (n *ExprAssignDiv) Accept(v Visitor) {
@@ -1252,6 +1921,10 @@ func (n *ExprAssignDiv) Accept(v Visitor) {
 
 func (n *ExprAssignDiv) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *ExprAssignDiv) GetType() Type {
+    return TypeExprAssignDiv
 }
 
 var _ Vertex = &ExprAssignMinus{}
@@ -1264,6 +1937,10 @@ func (n *ExprAssignMinus) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *ExprAssignMinus) GetType() Type {
+    return TypeExprAssignMinus
+}
+
 var _ Vertex = &ExprAssignMod{}
 
 func (n *ExprAssignMod) Accept(v Visitor) {
@@ -1272,6 +1949,10 @@ func (n *ExprAssignMod) Accept(v Visitor) {
 
 func (n *ExprAssignMod) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *ExprAssignMod) GetType() Type {
+    return TypeExprAssignMod
 }
 
 var _ Vertex = &ExprAssignMul{}
@@ -1284,6 +1965,10 @@ func (n *ExprAssignMul) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *ExprAssignMul) GetType() Type {
+    return TypeExprAssignMul
+}
+
 var _ Vertex = &ExprAssignPlus{}
 
 func (n *ExprAssignPlus) Accept(v Visitor) {
@@ -1292,6 +1977,10 @@ func (n *ExprAssignPlus) Accept(v Visitor) {
 
 func (n *ExprAssignPlus) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *ExprAssignPlus) GetType() Type {
+    return TypeExprAssignPlus
 }
 
 var _ Vertex = &ExprAssignPow{}
@@ -1304,6 +1993,10 @@ func (n *ExprAssignPow) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *ExprAssignPow) GetType() Type {
+    return TypeExprAssignPow
+}
+
 var _ Vertex = &ExprAssignShiftLeft{}
 
 func (n *ExprAssignShiftLeft) Accept(v Visitor) {
@@ -1312,6 +2005,10 @@ func (n *ExprAssignShiftLeft) Accept(v Visitor) {
 
 func (n *ExprAssignShiftLeft) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *ExprAssignShiftLeft) GetType() Type {
+    return TypeExprAssignShiftLeft
 }
 
 var _ Vertex = &ExprAssignShiftRight{}
@@ -1324,6 +2021,10 @@ func (n *ExprAssignShiftRight) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *ExprAssignShiftRight) GetType() Type {
+    return TypeExprAssignShiftRight
+}
+
 var _ Vertex = &ExprBinaryBitwiseAnd{}
 
 func (n *ExprBinaryBitwiseAnd) Accept(v Visitor) {
@@ -1332,6 +2033,10 @@ func (n *ExprBinaryBitwiseAnd) Accept(v Visitor) {
 
 func (n *ExprBinaryBitwiseAnd) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *ExprBinaryBitwiseAnd) GetType() Type {
+    return TypeExprBinaryBitwiseAnd
 }
 
 var _ Vertex = &ExprBinaryBitwiseOr{}
@@ -1344,6 +2049,10 @@ func (n *ExprBinaryBitwiseOr) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *ExprBinaryBitwiseOr) GetType() Type {
+    return TypeExprBinaryBitwiseOr
+}
+
 var _ Vertex = &ExprBinaryBitwiseXor{}
 
 func (n *ExprBinaryBitwiseXor) Accept(v Visitor) {
@@ -1352,6 +2061,10 @@ func (n *ExprBinaryBitwiseXor) Accept(v Visitor) {
 
 func (n *ExprBinaryBitwiseXor) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *ExprBinaryBitwiseXor) GetType() Type {
+    return TypeExprBinaryBitwiseXor
 }
 
 var _ Vertex = &ExprBinaryBooleanAnd{}
@@ -1364,6 +2077,10 @@ func (n *ExprBinaryBooleanAnd) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *ExprBinaryBooleanAnd) GetType() Type {
+    return TypeExprBinaryBooleanAnd
+}
+
 var _ Vertex = &ExprBinaryBooleanOr{}
 
 func (n *ExprBinaryBooleanOr) Accept(v Visitor) {
@@ -1372,6 +2089,10 @@ func (n *ExprBinaryBooleanOr) Accept(v Visitor) {
 
 func (n *ExprBinaryBooleanOr) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *ExprBinaryBooleanOr) GetType() Type {
+    return TypeExprBinaryBooleanOr
 }
 
 var _ Vertex = &ExprBinaryCoalesce{}
@@ -1384,6 +2105,10 @@ func (n *ExprBinaryCoalesce) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *ExprBinaryCoalesce) GetType() Type {
+    return TypeExprBinaryCoalesce
+}
+
 var _ Vertex = &ExprBinaryConcat{}
 
 func (n *ExprBinaryConcat) Accept(v Visitor) {
@@ -1392,6 +2117,10 @@ func (n *ExprBinaryConcat) Accept(v Visitor) {
 
 func (n *ExprBinaryConcat) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *ExprBinaryConcat) GetType() Type {
+    return TypeExprBinaryConcat
 }
 
 var _ Vertex = &ExprBinaryDiv{}
@@ -1404,6 +2133,10 @@ func (n *ExprBinaryDiv) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *ExprBinaryDiv) GetType() Type {
+    return TypeExprBinaryDiv
+}
+
 var _ Vertex = &ExprBinaryEqual{}
 
 func (n *ExprBinaryEqual) Accept(v Visitor) {
@@ -1412,6 +2145,10 @@ func (n *ExprBinaryEqual) Accept(v Visitor) {
 
 func (n *ExprBinaryEqual) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *ExprBinaryEqual) GetType() Type {
+    return TypeExprBinaryEqual
 }
 
 var _ Vertex = &ExprBinaryGreater{}
@@ -1424,6 +2161,10 @@ func (n *ExprBinaryGreater) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *ExprBinaryGreater) GetType() Type {
+    return TypeExprBinaryGreater
+}
+
 var _ Vertex = &ExprBinaryGreaterOrEqual{}
 
 func (n *ExprBinaryGreaterOrEqual) Accept(v Visitor) {
@@ -1432,6 +2173,10 @@ func (n *ExprBinaryGreaterOrEqual) Accept(v Visitor) {
 
 func (n *ExprBinaryGreaterOrEqual) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *ExprBinaryGreaterOrEqual) GetType() Type {
+    return TypeExprBinaryGreaterOrEqual
 }
 
 var _ Vertex = &ExprBinaryIdentical{}
@@ -1444,6 +2189,10 @@ func (n *ExprBinaryIdentical) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *ExprBinaryIdentical) GetType() Type {
+    return TypeExprBinaryIdentical
+}
+
 var _ Vertex = &ExprBinaryLogicalAnd{}
 
 func (n *ExprBinaryLogicalAnd) Accept(v Visitor) {
@@ -1452,6 +2201,10 @@ func (n *ExprBinaryLogicalAnd) Accept(v Visitor) {
 
 func (n *ExprBinaryLogicalAnd) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *ExprBinaryLogicalAnd) GetType() Type {
+    return TypeExprBinaryLogicalAnd
 }
 
 var _ Vertex = &ExprBinaryLogicalOr{}
@@ -1464,6 +2217,10 @@ func (n *ExprBinaryLogicalOr) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *ExprBinaryLogicalOr) GetType() Type {
+    return TypeExprBinaryLogicalOr
+}
+
 var _ Vertex = &ExprBinaryLogicalXor{}
 
 func (n *ExprBinaryLogicalXor) Accept(v Visitor) {
@@ -1472,6 +2229,10 @@ func (n *ExprBinaryLogicalXor) Accept(v Visitor) {
 
 func (n *ExprBinaryLogicalXor) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *ExprBinaryLogicalXor) GetType() Type {
+    return TypeExprBinaryLogicalXor
 }
 
 var _ Vertex = &ExprBinaryMinus{}
@@ -1484,6 +2245,10 @@ func (n *ExprBinaryMinus) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *ExprBinaryMinus) GetType() Type {
+    return TypeExprBinaryMinus
+}
+
 var _ Vertex = &ExprBinaryMod{}
 
 func (n *ExprBinaryMod) Accept(v Visitor) {
@@ -1492,6 +2257,10 @@ func (n *ExprBinaryMod) Accept(v Visitor) {
 
 func (n *ExprBinaryMod) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *ExprBinaryMod) GetType() Type {
+    return TypeExprBinaryMod
 }
 
 var _ Vertex = &ExprBinaryMul{}
@@ -1504,6 +2273,10 @@ func (n *ExprBinaryMul) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *ExprBinaryMul) GetType() Type {
+    return TypeExprBinaryMul
+}
+
 var _ Vertex = &ExprBinaryNotEqual{}
 
 func (n *ExprBinaryNotEqual) Accept(v Visitor) {
@@ -1512,6 +2285,10 @@ func (n *ExprBinaryNotEqual) Accept(v Visitor) {
 
 func (n *ExprBinaryNotEqual) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *ExprBinaryNotEqual) GetType() Type {
+    return TypeExprBinaryNotEqual
 }
 
 var _ Vertex = &ExprBinaryNotIdentical{}
@@ -1524,6 +2301,10 @@ func (n *ExprBinaryNotIdentical) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *ExprBinaryNotIdentical) GetType() Type {
+    return TypeExprBinaryNotIdentical
+}
+
 var _ Vertex = &ExprBinaryPlus{}
 
 func (n *ExprBinaryPlus) Accept(v Visitor) {
@@ -1532,6 +2313,10 @@ func (n *ExprBinaryPlus) Accept(v Visitor) {
 
 func (n *ExprBinaryPlus) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *ExprBinaryPlus) GetType() Type {
+    return TypeExprBinaryPlus
 }
 
 var _ Vertex = &ExprBinaryPow{}
@@ -1544,6 +2329,10 @@ func (n *ExprBinaryPow) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *ExprBinaryPow) GetType() Type {
+    return TypeExprBinaryPow
+}
+
 var _ Vertex = &ExprBinaryShiftLeft{}
 
 func (n *ExprBinaryShiftLeft) Accept(v Visitor) {
@@ -1552,6 +2341,10 @@ func (n *ExprBinaryShiftLeft) Accept(v Visitor) {
 
 func (n *ExprBinaryShiftLeft) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *ExprBinaryShiftLeft) GetType() Type {
+    return TypeExprBinaryShiftLeft
 }
 
 var _ Vertex = &ExprBinaryShiftRight{}
@@ -1564,6 +2357,10 @@ func (n *ExprBinaryShiftRight) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *ExprBinaryShiftRight) GetType() Type {
+    return TypeExprBinaryShiftRight
+}
+
 var _ Vertex = &ExprBinarySmaller{}
 
 func (n *ExprBinarySmaller) Accept(v Visitor) {
@@ -1572,6 +2369,10 @@ func (n *ExprBinarySmaller) Accept(v Visitor) {
 
 func (n *ExprBinarySmaller) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *ExprBinarySmaller) GetType() Type {
+    return TypeExprBinarySmaller
 }
 
 var _ Vertex = &ExprBinarySmallerOrEqual{}
@@ -1584,6 +2385,10 @@ func (n *ExprBinarySmallerOrEqual) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *ExprBinarySmallerOrEqual) GetType() Type {
+    return TypeExprBinarySmallerOrEqual
+}
+
 var _ Vertex = &ExprBinarySpaceship{}
 
 func (n *ExprBinarySpaceship) Accept(v Visitor) {
@@ -1592,6 +2397,10 @@ func (n *ExprBinarySpaceship) Accept(v Visitor) {
 
 func (n *ExprBinarySpaceship) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *ExprBinarySpaceship) GetType() Type {
+    return TypeExprBinarySpaceship
 }
 
 var _ Vertex = &ExprMatch{}
@@ -1604,6 +2413,10 @@ func (n *ExprMatch) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *ExprMatch) GetType() Type {
+    return TypeExprMatch
+}
+
 var _ Vertex = &ExprThrow{}
 
 func (n *ExprThrow) Accept(v Visitor) {
@@ -1612,6 +2425,10 @@ func (n *ExprThrow) Accept(v Visitor) {
 
 func (n *ExprThrow) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *ExprThrow) GetType() Type {
+    return TypeExprThrow
 }
 
 var _ Vertex = &MatchArm{}
@@ -1624,6 +2441,10 @@ func (n *MatchArm) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *MatchArm) GetType() Type {
+    return TypeMatchArm
+}
+
 var _ Vertex = &Name{}
 
 func (n *Name) Accept(v Visitor) {
@@ -1632,6 +2453,10 @@ func (n *Name) Accept(v Visitor) {
 
 func (n *Name) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *Name) GetType() Type {
+    return TypeName
 }
 
 var _ Vertex = &NameFullyQualified{}
@@ -1644,6 +2469,10 @@ func (n *NameFullyQualified) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *NameFullyQualified) GetType() Type {
+    return TypeNameFullyQualified
+}
+
 var _ Vertex = &NameRelative{}
 
 func (n *NameRelative) Accept(v Visitor) {
@@ -1654,6 +2483,10 @@ func (n *NameRelative) GetPosition() *position.Position {
     return n.Position
 }
 
+func (n *NameRelative) GetType() Type {
+    return TypeNameRelative
+}
+
 var _ Vertex = &NamePart{}
 
 func (n *NamePart) Accept(v Visitor) {
@@ -1662,4 +2495,8 @@ func (n *NamePart) Accept(v Visitor) {
 
 func (n *NamePart) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *NamePart) GetType() Type {
+    return TypeNamePart
 }

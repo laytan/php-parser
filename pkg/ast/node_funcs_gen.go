@@ -28,6 +28,16 @@ var fileTempl = template.Must(
 package ast
 
 import "github.com/VKCOM/php-parser/pkg/position"
+
+type Type int
+
+const (
+    TypeNone Type = iota
+    {{- range $i, $typ := .Types }}
+    Type{{ $typ.Name }}
+    {{- end }}
+    TypeCount
+)
 {{range $typ := .Types}}
 var _ Vertex = &{{$typ.Name}}{}
 
@@ -37,6 +47,10 @@ func (n *{{$typ.Name}}) Accept(v Visitor) {
 
 func (n *{{$typ.Name}}) GetPosition() *position.Position {
     return n.Position
+}
+
+func (n *{{$typ.Name}}) GetType() Type {
+    return Type{{$typ.Name}}
 }
 {{end}}`),
 )

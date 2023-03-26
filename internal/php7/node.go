@@ -21,6 +21,10 @@ func (n *ParserBrackets) GetPosition() *position.Position {
 	return n.Position
 }
 
+func (n *ParserBrackets) GetType() ast.Type {
+	return ast.TypeNone
+}
+
 type ParserSeparatedList struct {
 	Position      *position.Position
 	Items         []ast.Vertex
@@ -33,6 +37,10 @@ func (n *ParserSeparatedList) Accept(v ast.Visitor) {
 
 func (n *ParserSeparatedList) GetPosition() *position.Position {
 	return n.Position
+}
+
+func (n *ParserSeparatedList) GetType() ast.Type {
+	return ast.TypeNone
 }
 
 // TraitAdaptationList node
@@ -49,6 +57,10 @@ func (n *TraitAdaptationList) Accept(v ast.Visitor) {
 
 func (n *TraitAdaptationList) GetPosition() *position.Position {
 	return n.Position
+}
+
+func (n *TraitAdaptationList) GetType() ast.Type {
+	return ast.TypeNone
 }
 
 // ArgumentList node
@@ -68,6 +80,10 @@ func (n *ArgumentList) GetPosition() *position.Position {
 	return n.Position
 }
 
+func (n *ArgumentList) GetType() ast.Type {
+	return ast.TypeNone
+}
+
 type ReturnType struct {
 	Position *position.Position
 	ColonTkn *token.Token
@@ -80,6 +96,10 @@ func (n *ReturnType) Accept(v ast.Visitor) {
 
 func (n *ReturnType) GetPosition() *position.Position {
 	return n.Position
+}
+
+func (n *ReturnType) GetType() ast.Type {
+	return ast.TypeNone
 }
 
 // TraitMethodRef node
@@ -96,4 +116,8 @@ func (n *TraitMethodRef) Accept(v ast.Visitor) {
 
 func (n *TraitMethodRef) GetPosition() *position.Position {
 	return n.Position
+}
+
+func (n *TraitMethodRef) GetType() ast.Type {
+	return ast.TypeNone
 }

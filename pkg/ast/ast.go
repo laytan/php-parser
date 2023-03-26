@@ -14,6 +14,7 @@ var TypeToVisitorNameMap = map[string]string{
 type Vertex interface {
 	Accept(v Visitor)
 	GetPosition() *position.Position
+	GetType() Type
 }
 
 type Visitor interface {
