@@ -2,6 +2,35 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## v0.9.0 2022-26-03
+
+### Breaking Changes
+
+- Dropped PHP 5 support to increase velocity/productivity
+
+### Added
+
+- Nodes and tokens now also contain their StartCol and EndCol
+- 2 new interfaces for traversers (backwards compatible):
+    - `traversers.CheckEntrance` interface: provides an `EnterNode(ast.Vertex) bool` that, when implemented, is called before entering a node, allowing short circuiting and more control over the traversal
+    - `traversers.NotifyLeave` interface: provides an `LeaveNode(ast.Vertex)` that, when implemented, is called when a node has fully been traversed, again allowing for more control
+
+### Fixes
+
+- Fixed a bug where the parser would use token.DefaultBlockSize instead of position.DefaultBlockSize when instantiating the parser
+
+### Internals
+
+- Rely on code generations for several repeating/boilerplate tasks
+- Refactors and deduplication after PHP 5 removal
+- Add golangci-lint configuration and an editorconfig file
+
+## v0.8.3 2022-09-09
+
+### Changed
+
+- reduce memory usage by allocating smaller position blocks
+
 ## `v0.8.2` 2022-26-06
 
 ### Added

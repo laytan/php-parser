@@ -1,4 +1,4 @@
-> This is a fork of the [z7zmey](https://github.com/z7zmey) [parser](https://github.com/z7zmey/php-parser) that adds PHP 8 support.
+> This is a fork of the [VKCOM php-parse](https://github.com/VKCOM/php-parser), which in itself is a fork of [z7zmey](https://github.com/z7zmey) [parser](https://github.com/z7zmey/php-parser) that adds PHP 8 support.
 
 PHP Parser written in Go
 ========================
@@ -65,7 +65,7 @@ func main() {
 	if err != nil {
 		log.Fatal("Error:" + err.Error())
 	}
-	
+
 	if len(parserErrors) > 0 {
 		for _, e := range parserErrors {
 			log.Println(e.String())
