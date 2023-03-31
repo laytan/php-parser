@@ -1,6 +1,6 @@
 package ast
 
-import "github.com/VKCOM/php-parser/pkg/position"
+import "github.com/laytan/php-parser/pkg/position"
 
 // The edge-case/overwrites, from node type name to their visitor function name.
 var TypeToVisitorNameMap = map[string]string{

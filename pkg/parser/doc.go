@@ -9,11 +9,11 @@ Package usage example:
 		"log"
 		"os"
 
-		"github.com/VKCOM/php-parser/pkg/conf"
-		"github.com/VKCOM/php-parser/pkg/errors"
-		"github.com/VKCOM/php-parser/pkg/parser"
-		"github.com/VKCOM/php-parser/pkg/version"
-		"github.com/VKCOM/php-parser/pkg/visitor/dumper"
+		"github.com/laytan/php-parser/pkg/conf"
+		"github.com/laytan/php-parser/pkg/errors"
+		"github.com/laytan/php-parser/pkg/parser"
+		"github.com/laytan/php-parser/pkg/version"
+		"github.com/laytan/php-parser/pkg/visitor/dumper"
 	)
 
 	func main() {

@@ -2,7 +2,7 @@
 
 package traverser
 
-import "github.com/VKCOM/php-parser/pkg/ast"
+import "github.com/laytan/php-parser/pkg/ast"
 
 func (t *Traverser) Root(n *ast.Root) {
     if !t.checkEntrance(n) {

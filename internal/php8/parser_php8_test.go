@@ -3,14 +3,14 @@ package php8_test
 import (
 	"testing"
 
-	"github.com/VKCOM/php-parser/internal/tester"
-	"github.com/VKCOM/php-parser/pkg/ast"
-	"github.com/VKCOM/php-parser/pkg/conf"
-	"github.com/VKCOM/php-parser/pkg/errors"
-	"github.com/VKCOM/php-parser/pkg/parser"
-	"github.com/VKCOM/php-parser/pkg/position"
-	"github.com/VKCOM/php-parser/pkg/token"
-	"github.com/VKCOM/php-parser/pkg/version"
+	"github.com/laytan/php-parser/internal/tester"
+	"github.com/laytan/php-parser/pkg/ast"
+	"github.com/laytan/php-parser/pkg/conf"
+	"github.com/laytan/php-parser/pkg/errors"
+	"github.com/laytan/php-parser/pkg/parser"
+	"github.com/laytan/php-parser/pkg/position"
+	"github.com/laytan/php-parser/pkg/token"
+	"github.com/laytan/php-parser/pkg/version"
 	"gotest.tools/assert"
 )
 

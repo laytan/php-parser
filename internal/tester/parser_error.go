@@ -3,10 +3,10 @@ package tester
 import (
 	"testing"
 
-	"github.com/VKCOM/php-parser/pkg/conf"
-	"github.com/VKCOM/php-parser/pkg/errors"
-	"github.com/VKCOM/php-parser/pkg/parser"
-	"github.com/VKCOM/php-parser/pkg/version"
+	"github.com/laytan/php-parser/pkg/conf"
+	"github.com/laytan/php-parser/pkg/errors"
+	"github.com/laytan/php-parser/pkg/parser"
+	"github.com/laytan/php-parser/pkg/version"
 	"gotest.tools/assert"
 )
 

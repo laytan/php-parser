@@ -5,11 +5,11 @@ import (
 	"os"
 	"testing"
 
-	"github.com/VKCOM/php-parser/internal/php7"
-	"github.com/VKCOM/php-parser/pkg/ast"
-	"github.com/VKCOM/php-parser/pkg/conf"
-	"github.com/VKCOM/php-parser/pkg/version"
-	"github.com/VKCOM/php-parser/pkg/visitor/printer"
+	"github.com/laytan/php-parser/internal/php7"
+	"github.com/laytan/php-parser/pkg/ast"
+	"github.com/laytan/php-parser/pkg/conf"
+	"github.com/laytan/php-parser/pkg/version"
+	"github.com/laytan/php-parser/pkg/visitor/printer"
 )
 
 func ExamplePrinter() {

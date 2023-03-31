@@ -4,7 +4,7 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/VKCOM/php-parser/internal/position"
+	"github.com/laytan/php-parser/internal/position"
 	"gotest.tools/assert"
 )
 

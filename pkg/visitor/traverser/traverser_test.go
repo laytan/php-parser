@@ -3,9 +3,9 @@ package traverser_test
 import (
 	"testing"
 
-	"github.com/VKCOM/php-parser/pkg/ast"
-	"github.com/VKCOM/php-parser/pkg/visitor"
-	"github.com/VKCOM/php-parser/pkg/visitor/traverser"
+	"github.com/laytan/php-parser/pkg/ast"
+	"github.com/laytan/php-parser/pkg/visitor"
+	"github.com/laytan/php-parser/pkg/visitor/traverser"
 )
 
 // testCase is a traverser that does not go into any class statement or its children.

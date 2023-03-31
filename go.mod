@@ -1,4 +1,4 @@
-module github.com/VKCOM/php-parser
+module github.com/laytan/php-parser
 
 go 1.13
 

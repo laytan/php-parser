@@ -1,3 +1,4 @@
+// ragel_subtype=go
 package php8
 
 import (

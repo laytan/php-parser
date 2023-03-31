@@ -1,9 +1,9 @@
 package position
 
 import (
-	"github.com/VKCOM/php-parser/pkg/ast"
-	"github.com/VKCOM/php-parser/pkg/position"
-	"github.com/VKCOM/php-parser/pkg/token"
+	"github.com/laytan/php-parser/pkg/ast"
+	"github.com/laytan/php-parser/pkg/position"
+	"github.com/laytan/php-parser/pkg/token"
 )
 
 type startPos struct {

@@ -1,7 +1,7 @@
 package traverser
 
 import (
-	"github.com/VKCOM/php-parser/pkg/ast"
+	"github.com/laytan/php-parser/pkg/ast"
 )
 
 //go:generate go run traverser_gen.go
