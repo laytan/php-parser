@@ -22,6 +22,9 @@ type formatter struct {
 	lastSemiColon *token.Token
 }
 
+// NewFormatter returns a new formatter. This formatter is not great, it can not be customized,
+// but most importantly, loses a lot of doc comments and regular comments, so don't use on code
+// that wants to keep all comments in tact.
 func NewFormatter() *formatter {
 	return &formatter{}
 }
@@ -83,6 +86,10 @@ func (f *formatter) newToken(id token.ID, val []byte) *token.Token {
 }
 
 func (f *formatter) formatList(nodes []ast.Vertex, separator byte) []*token.Token {
+	if len(nodes) == 0 {
+		return nil
+	}
+
 	separatorTkns := make([]*token.Token, len(nodes)-1)
 	for i, v := range nodes {
 		v.Accept(f)
@@ -844,7 +851,6 @@ func (f *formatter) StmtNamespace(n *ast.StmtNamespace) {
 	} else {
 		n.SemiColonTkn = f.newSemicolonTkn()
 	}
-
 }
 
 func (f *formatter) StmtNop(n *ast.StmtNop) {
@@ -1189,7 +1195,9 @@ func (f *formatter) ExprArrayItem(n *ast.ExprArrayItem) {
 		f.addFreeFloating(token.T_WHITESPACE, []byte(" "))
 	}
 
-	n.Val.Accept(f)
+	if n.Val != nil {
+		n.Val.Accept(f)
+	}
 }
 
 func (f *formatter) ExprArrowFunction(n *ast.ExprArrowFunction) {
