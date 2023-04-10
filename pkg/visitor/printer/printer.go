@@ -91,6 +91,21 @@ func (p *printer) printToken(t *token.Token, def []byte) {
 
 	for _, ff := range t.FreeFloating {
 		p.write(ff.Value)
+
+        // I believe doc comments have their newlines trimmed during parsing,
+        // Causing the output to look weird (like: "*/function" for example).
+        // Lets add a newline for now, as most doc comments are followed by a
+        // newline anyways.
+		if ff.ID == token.T_DOC_COMMENT {
+			p.write([]byte("\n"))
+
+            // Add indentation based on the indentation of the comment.
+            if len(ff.Value) > 4 {
+                for i := len(ff.Value)-4; ff.Value[i] == ' '; i-- {
+                    p.write([]byte(" "))
+                }
+            }
+		}
 	}
 	p.write(t.Value)
 }
