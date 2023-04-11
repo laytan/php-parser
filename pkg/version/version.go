@@ -81,6 +81,14 @@ func (v *Version) InRange(s, e *Version) bool {
 	return v.Compare(s) >= 0 && v.Compare(e) <= 0
 }
 
+func (v *Version) InPhp7Range() bool {
+    return v.InRange(php7RangeStart, php7RangeEnd)
+}
+
+func (v *Version) InPhp8Range() bool {
+    return v.InRange(php8RangeStart, php8RangeEnd)
+}
+
 // Compare compares this version to another one. It returns -1, 0, or 1 if
 // the version smaller, equal, or larger than the other version.
 func (v *Version) Compare(o *Version) int {
