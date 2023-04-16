@@ -290,6 +290,7 @@ func (b *Builder) parseNameToken(t *token.Token) *ast.NameRelative {
 		Position: b.Pos.NewTokenPosition(t),
 	}
 	s := t.Position.StartPos
+	sc := t.Position.StartCol
 	v := t.Value
 
 	if bytes.HasPrefix(bytes.ToLower(v), []byte("namespace")) {
@@ -298,6 +299,8 @@ func (b *Builder) parseNameToken(t *token.Token) *ast.NameRelative {
 		p1.EndLine = t.Position.EndLine
 		p1.StartPos = s
 		p1.EndPos = s + 9
+		p1.StartCol = sc
+		p1.EndCol = sc + 9
 
 		n.NsTkn = &token.Token{
 			ID:       token.T_NAMESPACE,
@@ -306,6 +309,7 @@ func (b *Builder) parseNameToken(t *token.Token) *ast.NameRelative {
 		}
 
 		s = s + 9
+		sc = sc + 9
 		v = v[9:]
 	}
 
@@ -315,6 +319,8 @@ func (b *Builder) parseNameToken(t *token.Token) *ast.NameRelative {
 		p1.EndLine = t.Position.EndLine
 		p1.StartPos = s
 		p1.EndPos = s + 1
+		p1.StartCol = sc
+		p1.EndCol = sc + 1
 
 		n.NsSeparatorTkn = &token.Token{
 			ID:       token.T_NS_SEPARATOR,
@@ -323,6 +329,7 @@ func (b *Builder) parseNameToken(t *token.Token) *ast.NameRelative {
 		}
 
 		s = s + 1
+		sc = sc + 1
 		v = v[1:]
 	}
 
@@ -337,6 +344,8 @@ func (b *Builder) parseNameToken(t *token.Token) *ast.NameRelative {
 		p1.EndLine = t.Position.EndLine
 		p1.StartPos = s
 		p1.EndPos = s + i
+		p1.StartCol = sc
+		p1.EndCol = sc + i
 
 		p2 := b.Parser.Lexer.positionPool.Get()
 		*p2 = *p1
@@ -353,6 +362,7 @@ func (b *Builder) parseNameToken(t *token.Token) *ast.NameRelative {
 		})
 		t.FreeFloating = nil
 		s = s + i
+		sc = sc + i
 		v = v[i:]
 
 		p1 = b.Parser.Lexer.positionPool.Get()
@@ -360,6 +370,8 @@ func (b *Builder) parseNameToken(t *token.Token) *ast.NameRelative {
 		p1.EndLine = t.Position.EndLine
 		p1.StartPos = s
 		p1.EndPos = s + 1
+		p1.StartCol = sc
+		p1.EndCol = sc + 1
 
 		n.SeparatorTkns = append(n.SeparatorTkns, &token.Token{
 			ID:       token.T_NS_SEPARATOR,
@@ -367,6 +379,7 @@ func (b *Builder) parseNameToken(t *token.Token) *ast.NameRelative {
 			Position: p1,
 		})
 		s = s + 1
+		sc = sc + 1
 		v = v[1:]
 	}
 
@@ -375,6 +388,8 @@ func (b *Builder) parseNameToken(t *token.Token) *ast.NameRelative {
 	p1.EndLine = t.Position.EndLine
 	p1.StartPos = s
 	p1.EndPos = s + len(v)
+	p1.StartCol = sc
+	p1.EndCol = sc + len(v)
 	p2 := b.Parser.Lexer.positionPool.Get()
 	*p2 = *p1
 
