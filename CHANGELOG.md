@@ -2,7 +2,24 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## v0.9.0 2022-26-03
+## v0.10.0 2023-17-04
+
+### Breaking Changes
+
+- Changed VKCOM to laytan in imports and `go.mod`
+
+### Added
+
+- `ast.Type` enum and `ast.Vertex` `GetType() ast.Type` function for easily checking and storing vertex types
+- Expose the internal lexer using `lexer.New(src []byte, config conf.Config) (Lexer, error)`
+
+### Fixes
+
+- Added some boundary checks in the formatter to prevent some panics
+- A newline will now be added after a doc comment in the printer
+- Some fixes for start and end column addition in previous release
+
+## v0.9.0 2023-26-03
 
 ### Breaking Changes
 
