@@ -143,7 +143,7 @@ func (b *Builder) NewTokensPosition(
 	pos.EndLine = endToken.Position.EndLine
 	pos.StartPos = startToken.Position.StartPos
 	pos.EndPos = endToken.Position.EndPos
-	pos.StartCol = endToken.Position.StartCol
+	pos.StartCol = startToken.Position.StartCol
 	pos.EndCol = endToken.Position.EndCol
 
 	return pos
