@@ -1,9 +1,10 @@
 package nsresolver_test
 
 import (
+	"testing"
+
 	"github.com/laytan/php-parser/pkg/visitor/nsresolver"
 	"github.com/laytan/php-parser/pkg/visitor/traverser"
-	"testing"
 
 	"gotest.tools/assert"
 
@@ -455,6 +456,36 @@ func TestResolveTraitName(t *testing.T) {
 
 	expected := map[ast.Vertex]string{
 		traitNode: "A",
+	}
+
+	nsResolver := nsresolver.NewNamespaceResolver()
+	traverser.NewTraverser(nsResolver).Traverse(stxTree)
+
+	assert.DeepEqual(t, expected, nsResolver.ResolvedNames)
+}
+
+func TestResolveEnumName(t *testing.T) {
+	nameAB := &ast.Name{Parts: []ast.Vertex{&ast.NamePart{Value: []byte("A")}, &ast.NamePart{Value: []byte("B")}}}
+	nameBC := &ast.Name{Parts: []ast.Vertex{&ast.NamePart{Value: []byte("B")}, &ast.NamePart{Value: []byte("C")}}}
+
+	enum := &ast.StmtEnum{
+		Name: &ast.Identifier{Value: []byte("A")},
+		Type: nameAB,
+		Implements: []ast.Vertex{
+			nameBC,
+		},
+	}
+
+	stxTree := &ast.StmtStmtList{
+		Stmts: []ast.Vertex{
+			enum,
+		},
+	}
+
+	expected := map[ast.Vertex]string{
+		enum:   "A",
+		nameAB: "A\\B",
+		nameBC: "B\\C",
 	}
 
 	nsResolver := nsresolver.NewNamespaceResolver()

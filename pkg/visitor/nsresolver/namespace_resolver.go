@@ -89,6 +89,22 @@ func (nsr *NamespaceResolver) StmtClass(n *ast.StmtClass) {
 	}
 }
 
+func (nsr *NamespaceResolver) StmtEnum(n *ast.StmtEnum) {
+	if n.Type != nil {
+		nsr.ResolveName(n.Type, "")
+	}
+
+	if n.Implements != nil {
+		for _, interfaceName := range n.Implements {
+			nsr.ResolveName(interfaceName, "")
+		}
+	}
+
+	if n.Name != nil {
+		nsr.AddNamespacedName(n, string(n.Name.(*ast.Identifier).Value))
+	}
+}
+
 func (nsr *NamespaceResolver) StmtInterface(n *ast.StmtInterface) {
 	if n.Extends != nil {
 		for _, interfaceName := range n.Extends {

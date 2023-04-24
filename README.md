@@ -111,7 +111,7 @@ php-parser [flags] <path> ...
 Namespace resolver
 ------------------
 
-Namespace resolver is a visitor that resolves nodes fully qualified name and saves into `map[node.Node]string` structure
+Namespace resolver is a visitor that resolves nodes fully qualified name and saves into `map[ast.Vertex]string` structure
 
-- For `Class`, `Interface`, `Trait`, `Function`, `Constant` nodes it saves name with current namespace.
+- For `Class`, `Interface`, `Trait`, `Enum`, `Function`, `Constant` nodes it saves name with current namespace.
 - For `Name`, `Relative`, `FullyQualified` nodes it resolves `use` aliases and saves a fully qualified name.
