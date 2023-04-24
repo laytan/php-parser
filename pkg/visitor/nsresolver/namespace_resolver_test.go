@@ -385,12 +385,20 @@ func TestResolveTraitUse(t *testing.T) {
 func TestResolveClassName(t *testing.T) {
 	nameAB := &ast.Name{Parts: []ast.Vertex{&ast.NamePart{Value: []byte("A")}, &ast.NamePart{Value: []byte("B")}}}
 	nameBC := &ast.Name{Parts: []ast.Vertex{&ast.NamePart{Value: []byte("B")}, &ast.NamePart{Value: []byte("C")}}}
+	nameCD := &ast.Name{Parts: []ast.Vertex{&ast.NamePart{Value: []byte("C")}, &ast.NamePart{Value: []byte("D")}}}
 
 	class := &ast.StmtClass{
 		Name:    &ast.Identifier{Value: []byte("A")},
 		Extends: nameAB,
 		Implements: []ast.Vertex{
 			nameBC,
+		},
+		AttrGroups: []ast.Vertex{
+			&ast.AttributeGroup{
+				Attrs: []ast.Vertex{
+					&ast.Attribute{Name: nameCD},
+				},
+			},
 		},
 	}
 
@@ -404,6 +412,7 @@ func TestResolveClassName(t *testing.T) {
 		class:  "A",
 		nameAB: "A\\B",
 		nameBC: "B\\C",
+		nameCD: "C\\D",
 	}
 
 	nsResolver := nsresolver.NewNamespaceResolver()
@@ -629,6 +638,19 @@ func TestResolveNamespaces(t *testing.T) {
 	nameFG := &ast.Name{Parts: []ast.Vertex{&ast.NamePart{Value: []byte("F")}, &ast.NamePart{Value: []byte("G")}}}
 	relativeNameCE := &ast.NameRelative{Parts: []ast.Vertex{&ast.NamePart{Value: []byte("C")}, &ast.NamePart{Value: []byte("E")}}}
 
+	relativeNameCA := &ast.NameRelative{Parts: []ast.Vertex{&ast.NamePart{Value: []byte("C")}, &ast.NamePart{Value: []byte("A")}}}
+
+	classA := &ast.StmtClass{
+		Name: &ast.Identifier{Value: []byte("A")},
+		AttrGroups: []ast.Vertex{
+			&ast.AttributeGroup{
+				Attrs: []ast.Vertex{
+					&ast.Attribute{Name: relativeNameCA},
+				},
+			},
+		},
+	}
+
 	constantB := &ast.StmtConstant{
 		Name: &ast.Identifier{Value: []byte("B")},
 		Expr: &ast.ScalarLnumber{Value: []byte("1")},
@@ -643,6 +665,9 @@ func TestResolveNamespaces(t *testing.T) {
 			&ast.StmtNamespace{
 				Name: namespaceAB,
 			},
+
+			classA,
+
 			&ast.StmtConstList{
 				Consts: []ast.Vertex{
 					constantB,
@@ -653,6 +678,7 @@ func TestResolveNamespaces(t *testing.T) {
 				Class: nameFG,
 				Call:  &ast.Identifier{Value: []byte("foo")},
 			},
+
 			&ast.StmtNamespace{
 				Stmts: []ast.Vertex{},
 			},
@@ -680,6 +706,8 @@ func TestResolveNamespaces(t *testing.T) {
 	}
 
 	expected := map[ast.Vertex]string{
+		classA:         "A\\B\\A",
+		relativeNameCA: "A\\B\\C\\A",
 		constantB:      "A\\B\\B",
 		constantC:      "A\\B\\C",
 		nameFG:         "A\\B\\F\\G",
