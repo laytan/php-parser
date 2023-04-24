@@ -278,6 +278,12 @@ func (nsr *NamespaceResolver) ResolveType(n ast.Vertex) {
 	switch nn := n.(type) {
 	case *ast.Nullable:
 		nsr.ResolveType(nn.Expr)
+
+	case *ast.Union:
+		for _, nnn := range nn.Types {
+			nsr.ResolveType(nnn)
+		}
+
 	case *ast.Name:
 		nsr.ResolveName(n, "")
 	case *ast.NameRelative:
