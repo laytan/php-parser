@@ -855,6 +855,12 @@ func TestDoNotResolveReservedNames(t *testing.T) {
 		},
 	}
 
+	nameMixed := &ast.Name{
+		Parts: []ast.Vertex{
+			&ast.NamePart{Value: []byte("mixed")},
+		},
+	}
+
 	function := &ast.StmtFunction{
 		Name: &ast.Identifier{Value: []byte("bar")},
 		Params: []ast.Vertex{
@@ -900,6 +906,12 @@ func TestDoNotResolveReservedNames(t *testing.T) {
 					Name: &ast.Identifier{Value: []byte("Object")},
 				},
 			},
+			&ast.Parameter{
+				Type: nameMixed,
+				Var: &ast.ExprVariable{
+					Name: &ast.Identifier{Value: []byte("Mixed")},
+				},
+			},
 		},
 	}
 
@@ -925,6 +937,7 @@ func TestDoNotResolveReservedNames(t *testing.T) {
 		nameVoid:     "void",
 		nameIterable: "iterable",
 		nameObject:   "object",
+		nameMixed:    "mixed",
 	}
 
 	nsResolver := nsresolver.NewNamespaceResolver()
