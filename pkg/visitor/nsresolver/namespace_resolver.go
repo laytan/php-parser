@@ -283,6 +283,10 @@ func (nsr *NamespaceResolver) ResolveType(n ast.Vertex) {
 		for _, nnn := range nn.Types {
 			nsr.ResolveType(nnn)
 		}
+	case *ast.Intersection:
+		for _, nnn := range nn.Types {
+			nsr.ResolveType(nnn)
+		}
 
 	case *ast.Name:
 		nsr.ResolveName(n, "")
