@@ -542,6 +542,8 @@ func TestResolveMethodName(t *testing.T) {
 	nameBC := &ast.Name{Parts: []ast.Vertex{&ast.NamePart{Value: []byte("B")}, &ast.NamePart{Value: []byte("C")}}}
 	nameCD := &ast.Name{Parts: []ast.Vertex{&ast.NamePart{Value: []byte("C")}, &ast.NamePart{Value: []byte("D")}}}
 	nameDE := &ast.Name{Parts: []ast.Vertex{&ast.NamePart{Value: []byte("D")}, &ast.NamePart{Value: []byte("E")}}}
+	nameEF := &ast.Name{Parts: []ast.Vertex{&ast.NamePart{Value: []byte("E")}, &ast.NamePart{Value: []byte("F")}}}
+	nameFG := &ast.Name{Parts: []ast.Vertex{&ast.NamePart{Value: []byte("F")}, &ast.NamePart{Value: []byte("G")}}}
 
 	methodNode := &ast.StmtClassMethod{
 		Name: &ast.Identifier{Value: []byte("A")},
@@ -553,6 +555,10 @@ func TestResolveMethodName(t *testing.T) {
 			&ast.Parameter{
 				Type: &ast.Union{Types: []ast.Vertex{nameCD, nameDE}},
 				Var:  &ast.ExprVariable{Name: &ast.Identifier{Value: []byte("all")}},
+			},
+			&ast.Parameter{
+				Type: &ast.Intersection{Types: []ast.Vertex{nameEF, nameFG}},
+				Var:  &ast.ExprVariable{Name: &ast.Identifier{Value: []byte("any")}},
 			},
 		},
 		ReturnType: &ast.Nullable{Expr: nameBC},
@@ -566,6 +572,8 @@ func TestResolveMethodName(t *testing.T) {
 		nameBC: "B\\C",
 		nameCD: "C\\D",
 		nameDE: "D\\E",
+		nameEF: "E\\F",
+		nameFG: "F\\G",
 	}
 
 	nsResolver := nsresolver.NewNamespaceResolver()
