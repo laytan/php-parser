@@ -867,6 +867,24 @@ func TestDoNotResolveReservedNames(t *testing.T) {
 		},
 	}
 
+	nameTrue := &ast.Name{
+		Parts: []ast.Vertex{
+			&ast.NamePart{Value: []byte("true")},
+		},
+	}
+
+	nameFalse := &ast.Name{
+		Parts: []ast.Vertex{
+			&ast.NamePart{Value: []byte("false")},
+		},
+	}
+
+	nameNull := &ast.Name{
+		Parts: []ast.Vertex{
+			&ast.NamePart{Value: []byte("null")},
+		},
+	}
+
 	function := &ast.StmtFunction{
 		Name: &ast.Identifier{Value: []byte("bar")},
 		Params: []ast.Vertex{
@@ -924,6 +942,24 @@ func TestDoNotResolveReservedNames(t *testing.T) {
 					Name: &ast.Identifier{Value: []byte("Never")},
 				},
 			},
+			&ast.Parameter{
+				Type: nameTrue,
+				Var: &ast.ExprVariable{
+					Name: &ast.Identifier{Value: []byte("True")},
+				},
+			},
+			&ast.Parameter{
+				Type: nameFalse,
+				Var: &ast.ExprVariable{
+					Name: &ast.Identifier{Value: []byte("False")},
+				},
+			},
+			&ast.Parameter{
+				Type: nameNull,
+				Var: &ast.ExprVariable{
+					Name: &ast.Identifier{Value: []byte("Null")},
+				},
+			},
 		},
 	}
 
@@ -951,6 +987,9 @@ func TestDoNotResolveReservedNames(t *testing.T) {
 		nameObject:   "object",
 		nameMixed:    "mixed",
 		nameNever:    "never",
+		nameTrue:     "true",
+		nameFalse:    "false",
+		nameNull:     "null",
 	}
 
 	nsResolver := nsresolver.NewNamespaceResolver()

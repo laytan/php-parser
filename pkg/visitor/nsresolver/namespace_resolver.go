@@ -374,6 +374,8 @@ func (ns *Namespace) ResolveName(nameNode ast.Vertex, aliasType string) (string,
 			case "mixed": // 8.0
 				fallthrough
 			case "never": // 8.1
+				fallthrough
+			case "true", "false", "null": // 8.2
 				return part, nil
 			}
 		}
