@@ -222,6 +222,10 @@ func (nsr *NamespaceResolver) StmtTraitUse(n *ast.StmtTraitUse) {
 	}
 }
 
+func (nsr *NamespaceResolver) Attribute(n *ast.Attribute) {
+	nsr.ResolveName(n.Name, "")
+}
+
 // LeaveNode is invoked after node process
 func (nsr *NamespaceResolver) LeaveNode(n ast.Vertex) {
 	switch nn := n.(type) {
