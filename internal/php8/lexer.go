@@ -67,6 +67,24 @@ func (lex *Lexer) setTokenPosition(token *token.Token) {
 	token.Position = pos
 }
 
+func (lex *Lexer) setTokenPrefixPosition(token *token.Token, n int) {
+	pos := lex.positionPool.Get()
+
+	endPos := lex.ts + n
+
+	sl, slb := lex.newLines.GetLine(lex.ts)
+	el, elb := lex.newLines.GetLine(endPos)
+
+	pos.StartLine = sl
+	pos.EndLine = el
+	pos.StartPos = lex.ts
+	pos.EndPos = endPos
+	pos.StartCol = lex.ts - slb
+	pos.EndCol = endPos - elb
+
+	token.Position = pos
+}
+
 func (lex *Lexer) addFreeFloatingToken(t *token.Token, id token.ID, ps, pe int) {
 	skippedTkn := lex.tokenPool.Get()
 	skippedTkn.ID = id
@@ -196,6 +214,11 @@ func (lex *Lexer) ungetStr(s string) {
 	if strings.HasSuffix(tokenStr, s) {
 		lex.ungetCnt(len(s))
 	}
+}
+
+func (lex *Lexer) ungetFromStart(n int) {
+	tokenLength := lex.te - lex.ts
+	lex.ungetCnt(tokenLength - n)
 }
 
 func (lex *Lexer) ungetCnt(n int) {

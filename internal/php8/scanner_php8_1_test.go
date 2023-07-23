@@ -181,6 +181,31 @@ func TestEnumTokens(t *testing.T) {
 	suite.Run()
 }
 
+func TestClassNameEnum(t *testing.T) {
+	suite := tester.NewLexerTokenStructTestSuite(t)
+	suite.UsePHP8()
+	suite.Code = "<?php class Enum {}"
+	suite.Expected = []*token.Token{
+		{
+			ID:    token.T_CLASS,
+			Value: []byte("class"),
+		},
+		{
+			ID:    token.T_STRING,
+			Value: []byte("Enum"),
+		},
+		{
+			ID:    '{',
+			Value: []byte("{"),
+		},
+		{
+			ID:    '}',
+			Value: []byte("}"),
+		},
+	}
+	suite.Run()
+}
+
 func TestAmpersandFollowedByEllipsisTokens(t *testing.T) {
 	suite := tester.NewLexerTokenStructTestSuite(t)
 	suite.UsePHP8()
