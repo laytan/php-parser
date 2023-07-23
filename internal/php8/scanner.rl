@@ -6,7 +6,7 @@ import (
     "strconv"
     "strings"
 
-    "github.com/VKCOM/php-parser/pkg/token"
+    "github.com/laytan/php-parser/pkg/token"
 )
 
 %%{ 
@@ -240,7 +240,8 @@ func (lex *Lexer) Lex() *token.Token {
             'endif'i                          => {lex.setTokenPosition(tkn); tok = token.T_ENDIF; fbreak;};
             'endswitch'i                      => {lex.setTokenPosition(tkn); tok = token.T_ENDSWITCH; fbreak;};
             'endwhile'i                       => {lex.setTokenPosition(tkn); tok = token.T_ENDWHILE; fbreak;};
-            'enum'i                           => {lex.setTokenPosition(tkn); tok = token.T_ENUM; fbreak;};
+            'enum'i whitespace+ varname_first => {lex.setTokenPrefixPosition(tkn, 4); tok = token.T_ENUM;  lex.ungetFromStart(4); fbreak;};
+            'enum'i whitespace+ ('extends'i | 'implements'i) => {lex.setTokenPrefixPosition(tkn, 4); tok = token.T_STRING; lex.ungetFromStart(4); fbreak;};
             'eval'i                           => {lex.setTokenPosition(tkn); tok = token.T_EVAL; fbreak;};
             'exit'i | 'die'i                  => {lex.setTokenPosition(tkn); tok = token.T_EXIT; fbreak;};
             'extends'i                        => {lex.setTokenPosition(tkn); tok = token.T_EXTENDS; fbreak;};
